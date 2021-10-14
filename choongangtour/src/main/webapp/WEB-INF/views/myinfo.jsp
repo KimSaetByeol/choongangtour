@@ -56,7 +56,7 @@ function ok(){
 		<button type="submit" id="submitbtn" onclick="return ok()">정보변경</button>
 		<button type="button" onclick="deletemem()" id="submitbtn">회원탈퇴</button>
 	</form>
-	<a href="main.do">홈으로</a>
+	<a href="home.do">홈으로</a>
 </div>
 </body>
 </html>

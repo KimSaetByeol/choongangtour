@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="test">
+    <select id="board" resultType="HashMap"> <!--  상세정보 관광지 -->
+    select * from boardRegionview where re_no= #{re_no} and b_title = #{b_title} and visi =#{visi}
+    </select>
+    <select id="board2" resultType="HashMap"><!--  상세정보 이전 구역 관광지들 보여줌 -->
+    select * from boardRegionview2 where re_no= #{re_no} and visi =#{visi}  order by b_no</select>
+	
+	<insert id="adminWrite" parameterType="TestDTO">
+	INSERT INTO boardRegion (re_no, b_title, b_content, re_category, <if test="b_file != null">b_file</if>, <if test="b_img != null">b_img</if>) VALUES (#{re_no}, #{b_title}, #{b_content},
+	(select re_category from region where re_no=#{re_no}), 
+	 <if test="b_file != null">#{b_file}</if>, <if test="b_img != null"> #{b_img}</if>)
+	</insert>
+	
+	<insert id="adminWriteWithoutFile" parameterType="TestDTO">
+	INSERT INTO boardRegion (re_no, b_title, b_content, re_category ) VALUES (#{re_no}, #{b_title}, #{b_content},
+	(select re_category from region where re_no=#{re_no}))
+	</insert>
+	
+	<!-- 아래로 쭉 샛별 추가 1012 -->
+	<insert id="userWrite" parameterType="TestDTO">
+		INSERT INTO userBoardRegion(re_no, re_category, b_title, b_content, l_no<if test="b_file != null">,b_file, b_img</if>) VALUES 
+		(#{re_no}, (select re_category from region where re_no=#{re_no}), #{b_title}, #{b_content},
+		(SELECT l_no FROM login WHERE l_id=#{l_id}) <if test="b_file != null">, #{b_file}, #{b_img}</if> )
+	</insert>
+	
+	<select id="totalCount" parameterType="HashMap" resultType="HashMap">
+		SELECT count(*) as totalCount 
+		FROM userBoardRegion 
+		<if test="searchName == 'title' and search != null">
+			WHERE b_title LIKE CONCAT('%', #{search }, '%')
+		</if> 
+		<if test="searchName == 'content' and search != null">	
+			WHERE b_content LIKE CONCAT('%', #{search }, '%')
+		</if>
+		<if test="searchName == 'writer' and search != null">		
+			WHERE l_no LIKE CONCAT('%', #{search }, '%')
+		</if>
+	</select>
+	
+	<select id="userBoard" parameterType="HashMap" resultType="HashMap">
+		SELECT * FROM ubrview 
+		<if test="searchName == 'title' and search != null">
+			WHERE b_title LIKE CONCAT('%', #{search }, '%')
+		</if> 
+		<if test="searchName == 'content' and search != null">	
+			WHERE b_content LIKE CONCAT('%', #{search }, '%')
+		</if>
+		<if test="searchName == 'writer' and search != null">		
+			WHERE l_no LIKE CONCAT('%', #{search }, '%')
+		</if>
+		
+		LIMIT #{startPage }, #{lastPage }
+	</select>
+	
+	<select id="ubDetail" parameterType="HashMap" resultType="HashMap">
+		SELECT * FROM ubrview WHERE b_no=#{b_no}
+	</select>
+	
+	<update id="ubLike" parameterType="HashMap">
+		UPDATE userBoardRegion SET b_like=b_like+1 WHERE b_no=#{b_no}
+	</update>
+	
+</mapper>
+    

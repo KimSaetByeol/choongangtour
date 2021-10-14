@@ -1,14 +1,34 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ page session="false"%>
 <html>
 <head>
 	<title>Home</title>
+<style type="text/css">
+body{
+	font-size: 30pt;
+	margin: 0 auto;
+	text-align: center;
+
+}
+
+
+</style>
 </head>
+
 <body>
 <h1>
 	Hello world!  
 </h1>
 
 <P>  The time on the server is ${serverTime}. </P>
+
+
+<a href="./boardRegion.do?re_no=20">busan</a> <br>
+<a href="./adminPage.do">admin</a> <br>
+<a href="./touristSites.do">tour</a> <br>
+<a href="./userBoard.do">userBoard</a> <br>
+<a href="./infobox.do">로그인박스(임시)</a> <br>
 </body>
 </html>

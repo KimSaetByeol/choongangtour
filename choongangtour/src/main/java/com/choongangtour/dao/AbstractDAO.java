@@ -8,6 +8,8 @@ import org.apache.commons.logging.LogFactory;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.choongangtour.dto.TestDTO;
+
 //Login시 필요한 것만 붙여올 수 없어 일단 전부 복사해왔습니다! -샛별
 public class AbstractDAO {
 	protected Log log = LogFactory.getLog(AbstractDAO.class);
@@ -20,6 +22,16 @@ public class AbstractDAO {
 			log.debug("\t QueryID \t " + queryId);
 		}
 	}
+	
+	@SuppressWarnings("rawtypes")
+	  public List< Map<String, Object>> selectList(String queryID, TestDTO dto) {
+			printQueryId(queryID);
+			return sqlSession.selectList(queryID, dto);
+		}
+	  public int insert(String queryID, TestDTO dto  ) {
+		  printQueryId(queryID);
+		   return sqlSession.insert(queryID,  dto);
+	  }
 
 	public List<Map<String, Object>> selectList(String queryID, Map<String, Object> map) {
 		return sqlSession.selectList(queryID, map);
@@ -45,9 +57,9 @@ public class AbstractDAO {
 		return sqlSession.delete(queryID, map);
 	}
 
-	public void update(String queryID, Map<String, Object> map) {
+	public int update(String queryID, Map<String, Object> map) {
 		printQueryId(queryID);
-		sqlSession.update(queryID, map);
+		return sqlSession.update(queryID, map);
 	}
 	//메시지에서 no로 id불러오기	
 	public String getName(String queryID, Map<String, Object> map) {

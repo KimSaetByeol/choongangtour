@@ -21,7 +21,7 @@ public class FileSave {
 		String fileName = UUID.randomUUID().toString();
 		fileName = fileName + "_" + files.getOriginalFilename();
 		//           d4fe-fefe-fwae-afee_a.png
-		//System.out.println("만들어진 fileName : " + fileName);
+		System.out.println("fileName : " + fileName);
 		
 		//파일 올리기
 		file = new File(file, fileName);
@@ -43,13 +43,4 @@ public class FileSave {
 		files.transferTo(file);
 		return fileName;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }

@@ -24,9 +24,9 @@ public class LoginController {
 	private LoginServiceImpl loginService;
 	
 	//로그인 확인용 맵핑입니다 추후 삭제예정!
-	@GetMapping("/main.do")
+	@GetMapping("/infobox.do")
 	public String infobox() {
-		return "main";
+		return "infobox";
 	}
 	
 
@@ -52,7 +52,7 @@ public class LoginController {
 		session.setAttribute("l_name", login.get("l_name"));
 		session.setAttribute("l_id", login.get("l_id"));
 		
-		return "redirect:/main.do";
+		return "redirect:/home.do";
 	}
 
 	@GetMapping("/join.do")
@@ -63,7 +63,6 @@ public class LoginController {
 	@PostMapping("/join.do")
 	public String joinAction(CommandMap commandMap, HttpServletRequest request) {
 		System.out.println(commandMap.getMap());
-		System.out.println("테스트");
 		loginService.join(commandMap.getMap());
 
 		return "redirect:/login.do?code=join";
@@ -80,7 +79,7 @@ public class LoginController {
 		if (session.getAttribute("l_name") != null) {
 			session.removeAttribute("l_name");
 		}
-		return "redirect:/main.do";
+		return "redirect:/home.do";
 	}
 	
 	//ajax id check

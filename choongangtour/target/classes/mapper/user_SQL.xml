@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"	
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.choongangtour.web.user.user_SQL">
+
+	<select id="getUserInfo" resultType="com.choongangtour.web.user.model.UserVO">
+		SELECT l_no, l_id, l_name, l_pw, l_email, l_grade, l_joindate
+		FROM login
+		WHERE l_id=#{id} AND l_pw=#{pw}
+	</select>
+	
+	<select id="getUserList" resultType="com.choongangtour.web.user.model.UserVO">
+		SELECT l_no, l_id, l_name, l_pw, l_email, l_grade, l_joindate
+		FROM login
+	</select>
+	
+	<insert id="insertUser" parameterType="com.choongangtour.web.user.model.UserVO">
+		INSERT INTO login (l_no, l_name, l_id, l_pw, l_email, l_joindate, l_grade) 
+		VALUES ( #{no}, #{id} , #{name} , #{pw} , #{email} , #{joindate}, #{grade} ) 
+	</insert> 
+	
+	<update id="updateUser" parameterType="com.choongangtour.web.user.model.UserVO">
+		UPDATE login
+		SET l_name = #{name}, l_pw = #{pw} , l_email = #{email} , l_joindate = #{joindate}, l_grade = #{grade} 
+		WHERE l_id = #{id} 
+	</update> 
+	
+	<delete id="deleteUser" parameterType="int"> 
+		DELETE FROM login
+		WHERE l_id = #{id}
+	</delete>
+
+</mapper>
