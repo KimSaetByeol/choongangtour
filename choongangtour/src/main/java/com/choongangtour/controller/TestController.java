@@ -246,5 +246,22 @@ public class TestController {
 		chk = Integer.toString(chkInt);
 		return chk;
 	}
+	
+	@RequestMapping(value = "/map.do")
+    public ModelAndView map() {
+        // 반환타입에 들어갈 수 있는 것 3가지
+        // void 반환타입 없음 = 내부처리만 시키고 끝.
+        // String DB에 값 없이 페이지만 호출할때
+        // ModelAndView DB에 질의해서 반환타입을 view로 보낼때
+        // Model
+        ModelAndView mv = new ModelAndView("map");// board.jsp
+        // DB에 질의 하고 = select
+        List<Map<String, Object>> list = serviceImplements.boardList();
+        // mv에 데이터 붙이기
+        mv.addObject("list", list);// key value
+        // System.out.println(list);//출력해보기
+        return mv;
+    }
+	
 }
  

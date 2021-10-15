@@ -50,4 +50,8 @@ public class testDAO extends AbstractDAO {
 	public int ubLike(Map<String, Object> map) {
 		return update("test.ubLike", map);
 	}
+	
+	public List<Map<String, Object>> selectList(Map<String, Object> map) {
+        return (List<Map<String, Object>>) selectList("test.boardList", map);
+    }
 }

@@ -54,4 +54,8 @@ public class TestServiceImplements implements TestService {
 		return dao.ubLike(map);
 	}
 
+	public List<Map<String, Object>> boardList() {
+		return null;
+	}
+
 }
