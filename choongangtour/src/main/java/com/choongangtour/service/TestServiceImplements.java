@@ -58,4 +58,12 @@ public class TestServiceImplements implements TestService {
 		return null;
 	}
 
+	public void ubDelete(Map<String, Object> map) {
+		dao.ubDelete(map);
+	}
+
+	public void ubUpdate(TestDTO testDTO) {
+		dao.ubUpdate(testDTO);
+	}
+
 }

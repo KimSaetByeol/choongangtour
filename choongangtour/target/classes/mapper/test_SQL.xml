@@ -21,8 +21,8 @@
 	
 	<!-- 아래로 쭉 샛별 추가 1012 -->
 	<insert id="userWrite" parameterType="TestDTO">
-		INSERT INTO userBoardRegion(re_no, re_category, b_title, b_content, l_no<if test="b_file != null">,b_file, b_img</if>) VALUES 
-		(#{re_no}, (select re_category from region where re_no=#{re_no}), #{b_title}, #{b_content},
+		INSERT INTO userBoardRegion(re_no, b_title, b_content, l_no<if test="b_file != null">,b_file, b_img</if>) VALUES 
+		(#{re_no}, #{b_title}, #{b_content},
 		(SELECT l_no FROM login WHERE l_id=#{l_id}) <if test="b_file != null">, #{b_file}, #{b_img}</if> )
 	</insert>
 	
@@ -61,6 +61,20 @@
 	
 	<update id="ubLike" parameterType="HashMap">
 		UPDATE userBoardRegion SET b_like=b_like+1 WHERE b_no=#{b_no}
+	</update>
+	<update id="ubHate" parameterType="HashMap">
+		UPDATE userBoardRegion SET b_hate=b_hate+1 WHERE b_no=#{b_no}
+	</update>
+	
+	<delete id="ubDelete" parameterType="HashMap">
+		DELETE FROM userBoardRegion WHERE  b_no=#{b_no};
+	</delete>
+	
+	<update id="ubUpdate" parameterType="TestDTO">
+		UPDATE userBoardRegion SET re_no=#{re_no}, b_title=#{b_title}, 
+		b_content=#{b_content}, l_no=#{l_no} 
+		<if test="b_file != null">, b_file=#{b_file}, b_img=#{b_img} </if>
+		WHERE b_no=#{b_no};
 	</update>
 	
 </mapper>

@@ -28,8 +28,10 @@
 	
 	<div id="infobox"><c:import url="infobox.jsp"/></div>
 
-	<!-- 세션 확인 아직 추가안했음! 샛별 -->
-	<a href="./userWrite.do">글쓰기</a>
+	<!-- 샛별추가 1020 -->
+	<c:if test="${sessionScope.l_id ne null}">
+		<a href="./userWrite.do">글쓰기</a>
+	</c:if>
 	<table>
 		<tr>
 			<td>글번호</td>

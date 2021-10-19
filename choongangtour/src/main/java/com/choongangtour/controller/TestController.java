@@ -155,7 +155,7 @@ public class TestController {
 		TestDTO testDTO = new TestDTO();
 		testDTO.setB_title(request.getParameter("b_title"));// 타이틀
 		testDTO.setB_content(request.getParameter("b_content"));// 내용
-		int re_no = testDTO.setRe_no(util.str2Int2(request.getParameter("region")));//구역 
+		testDTO.setRe_no(util.str2Int2(request.getParameter("region")));//구역 
 		//jsp에 가져온 select option의 region 을 Re_no로 바꿈
 		
 		HttpSession session = request.getSession();
@@ -163,22 +163,22 @@ public class TestController {
 			return "redirect: login.do";
 		}
 		testDTO.setL_id((String) session.getAttribute("l_id")); 
-//		testDTO.setL_id("queen"); 
-		//유저 아이디 세션으로 불러와 저장, id는 일단 아무거나 설정해둘게유
+		System.out.println("file:"+file.getOriginalFilename());
 		
-		String b_img = null;
-		b_img = (String) testDTO.setB_img(file.getOriginalFilename());
-		String realPath = sc.getRealPath("resources/img/userboard/"); //저장경로 구분을 위해 userboard 폴더 추가
-		System.out.println("realPath = " + realPath);
-		System.out.println("file = " + file);
-		String upfile = save.save(realPath, file); //db에는 이미지 이름 저장됨
-		
-		testDTO.setB_file(upfile);
-		
-		System.out.println("content: "+  request.getParameter("b_content"));
-		System.out.println("file : " + file.getOriginalFilename());
-		System.out.println("fileSize: " + file.getSize());
-
+		if(file.getOriginalFilename() != "") {
+			String b_img = null;
+			b_img = (String) testDTO.setB_img(file.getOriginalFilename());
+			String realPath = sc.getRealPath("resources/img/userboard/"); //저장경로 구분을 위해 userboard 폴더 추가
+			System.out.println("realPath = " + realPath);
+			System.out.println("file = " + file);
+			String upfile = save.save(realPath, file); //db에는 이미지 이름 저장됨
+			
+			testDTO.setB_file(upfile);
+			
+			System.out.println("content: "+  request.getParameter("b_content"));
+			System.out.println("file : " + file.getOriginalFilename());
+			System.out.println("fileSize: " + file.getSize());
+		}
 		serviceImplements.userWrite(testDTO);
 		
 		return "redirect: userBoard.do";
@@ -238,9 +238,9 @@ public class TestController {
 		return mv;
 	}
 	
-	@RequestMapping(value="/ublike")
-	public @ResponseBody String ublike(CommandMap map, HttpServletRequest request) {
-		System.out.println("b_no는 " + map.get("b_no"));
+	//샛별수정 1020
+	@RequestMapping(value="/ubLike")
+	public @ResponseBody String ubLike(CommandMap map, HttpServletRequest request) {
 		String chk = "0";
 		int chkInt = serviceImplements.ubLike(map.getMap());
 		chk = Integer.toString(chkInt);
@@ -263,5 +263,58 @@ public class TestController {
         return mv;
     }
 	
+	//샛별추가 1020
+	@RequestMapping(value = "/ubDelete.do")
+	public String ubDelete(CommandMap map) {
+		serviceImplements.ubDelete(map.getMap());
+		
+		return "redirect: userBoard.do";
+	}
+	
+	@RequestMapping(value="/ubUpdate.do", method=RequestMethod.GET)
+	public ModelAndView ubUpdate(CommandMap map) {
+		ModelAndView mv = new ModelAndView("ubUpdate");
+		Map<String, Object> detail = serviceImplements.ubDetail(map.getMap());		
+		//수정용 디테일 불러오기
+		mv.addObject("detail", detail);
+		return mv;
+	}
+	
+	@RequestMapping(value="/ubUpdate", method=RequestMethod.POST)
+	public String ubUpdate(HttpServletRequest request, MultipartFile file) throws Exception {
+	
+		TestDTO testDTO = new TestDTO();
+		testDTO.setB_no(util.str2Int2(request.getParameter("b_no")));
+		testDTO.setL_no(util.str2Int2(request.getParameter("l_no")));
+		testDTO.setB_title(request.getParameter("b_title"));// 타이틀
+		testDTO.setB_content(request.getParameter("b_content"));// 내용
+		int re_no = testDTO.setRe_no(util.str2Int2(request.getParameter("region")));//구역 
+		//jsp에 가져온 select option의 region 을 Re_no로 바꿈
+		System.out.println("file : " + file.getOriginalFilename());
+		
+		HttpSession session = request.getSession();
+		if(session.getAttribute("l_id") == null) {
+			return "redirect: login.do";
+		}
+		testDTO.setL_id((String) session.getAttribute("l_id")); 
+		
+		if(file.getOriginalFilename() != "") {
+			String b_img = null;
+			b_img = (String) testDTO.setB_img(file.getOriginalFilename());
+			String realPath = sc.getRealPath("resources/img/userboard/"); //저장경로 구분을 위해 userboard 폴더 추가
+			System.out.println("realPath = " + realPath);
+			System.out.println("file = " + file);
+			String upfile = save.save(realPath, file); //db에는 이미지 이름 저장됨
+			
+			testDTO.setB_file(upfile);
+			
+			System.out.println("content: "+  request.getParameter("b_content"));
+			System.out.println("file : " + file.getOriginalFilename());
+			System.out.println("fileSize: " + file.getSize());
+		}
+		serviceImplements.ubUpdate(testDTO);
+		
+		return "redirect: userBoard.do";
+	}
 }
  
