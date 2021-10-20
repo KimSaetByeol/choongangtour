@@ -56,15 +56,15 @@ textarea{
 	 <option value="19" >북한</option>
 	 <option value="20" >부산</option>
 	 	</select>
-	<input type="text" name="b_title" placeholder="관광지를 입력해주세요."> <br>
-	<textarea name="b_content" id="summernote" >상세정보를 입력</textarea> <br>  
+	<input type="text" name="b_title" placeholder="제목을 입력해주세요."> <br>
+	<textarea name="b_content" id="summernote"></textarea> <br>  
 <script type="text/javascript">
 						$('#summernote').summernote({
 							  height: 500,                 
 							  minHeight: null,             // set minimum height of editor
 							  maxHeight: null,             // set maximum height of editor
-							  focus: true                  // set focus to editable area after initializing summernote
-						
+							  focus: true,                  // set focus to editable area after initializing summernote
+							  placeholder: '상세내용을 입력해주세요.'
 							});
 
 				</script>
