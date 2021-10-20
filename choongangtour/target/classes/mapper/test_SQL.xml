@@ -35,19 +35,6 @@
 
 	<!-- 아래로 쭉 샛별 추가 1012 -->
 	<insert id="userWrite" parameterType="TestDTO">
-
-		INSERT INTO userBoardRegion(re_no, re_category, b_title, b_content,
-		l_no
-		<if test="b_file != null">,b_file, b_img</if>
-		) VALUES
-		(#{re_no}, (select re_category from region where
-		re_no=#{re_no}), #{b_title},
-		#{b_content},
-		(SELECT l_no FROM login WHERE
-		l_id=#{l_id})
-		<if test="b_file != null">, #{b_file}, #{b_img}</if>
-		)
-
 		INSERT INTO userBoardRegion(re_no, b_title, b_content, l_no
 		<if test="b_file != null">,b_file, b_img</if>
 		) VALUES
@@ -56,7 +43,6 @@
 		WHERE l_id=#{l_id})
 		<if test="b_file != null">, #{b_file}, #{b_img}</if>
 		)
-		>>>>>>> 6e1ad7deab0df5d8dba9f6b121e6bf5b637e0225
 	</insert>
 
 	<select id="totalCount" parameterType="HashMap"
