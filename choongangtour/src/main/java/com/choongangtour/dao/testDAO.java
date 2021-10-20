@@ -25,18 +25,13 @@ public class testDAO extends AbstractDAO {
 		insert("test.adminWriteWithoutFile", dto);
 	}
 
-	//////////////////////////아래로 쭉 샛별 userWrite 추가 1012
+	////////////////////////// 아래로 쭉 샛별 userWrite 추가 1012
 	public void userWrite(TestDTO testDTO) {
 		insert("test.userWrite", testDTO);
 	}
 
 	public int totalCount(Map<String, Object> map) {
-		return
-			Integer.parseInt(
-				String.valueOf(
-					selectOne("test.totalCount", map).get("totalCount")
-				)
-			);
+		return Integer.parseInt(String.valueOf(selectOne("test.totalCount", map).get("totalCount")));
 	}
 
 	public List<Map<String, Object>> userBoard(Map<String, Object> map) {
@@ -47,12 +42,26 @@ public class testDAO extends AbstractDAO {
 		return selectOne("test.ubDetail", map);
 	}
 
+	// 샛별추가 1020
 	public int ubLike(Map<String, Object> map) {
-		return update("test.ubLike", map);
+		if (Integer.parseInt((String) map.get("ublikeValue")) == 0) {
+			return update("test.ubHate", map);
+		} else {
+			System.out.println("추천확인" + map.get("ublikeValue"));
+			return update("test.ubLike", map);
+		}
 	}
-	
+
 	public List<Map<String, Object>> selectList(Map<String, Object> map) {
-        return (List<Map<String, Object>>) selectList("test.boardList", map);
-    }
+		return (List<Map<String, Object>>) selectList("test.boardList", map);
+	}
+
+	public Object ubDelete(Map<String, Object> map) {
+		return delete("test.ubDelete", map);
+	}
+
+	public void ubUpdate(TestDTO testDTO) {
+		update("test.ubUpdate", testDTO);
+	}
 
 }
