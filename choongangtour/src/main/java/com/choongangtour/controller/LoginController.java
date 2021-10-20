@@ -180,4 +180,16 @@ public class LoginController {
 		
 		return check;
 	}
+	
+	//여행타입 테스트 여기에 넣었어요~
+	@GetMapping("/travelTest.do")
+	public String travelTest() {
+		return "travelTest";
+	}
+	
+	@PostMapping("/travelTest.do")
+	public ModelAndView typeSave(CommandMap commandMap) {
+		ModelAndView mv = new ModelAndView();
+		return mv;
+}
 }

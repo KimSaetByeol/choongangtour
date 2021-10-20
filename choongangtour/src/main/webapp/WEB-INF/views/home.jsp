@@ -30,5 +30,6 @@ body{
 <a href="./touristSites.do">tour</a> <br>
 <a href="./userBoard.do">userBoard</a> <br>
 <a href="./infobox.do">로그인박스(임시)</a> <br>
+<a href="./travelTest.do">여행테스트</a> <br>
 </body>
 </html>

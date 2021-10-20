@@ -38,4 +38,8 @@ public class LoginDAO extends AbstractDAO{
 	public String checkName(Map<String, Object> map) {
 		return selectOneStr("login.checkName", map);
 	}
+	
+	public void typeSave(Map<String, Object> map) {
+		update("login.typeSave", map);
+	}
 }
