@@ -34,14 +34,14 @@
 	</insert>
 
 	<!-- 아래로 쭉 샛별 추가 1012 -->
-	<insert id="userWrite" parameterType="TestDTO">
+	<insert id="userWrite" parameterType="HashMap">
 		INSERT INTO userBoardRegion(re_no, b_title, b_content, l_no
-		<if test="b_file != null">,b_file, b_img</if>
+		<if test="b_url != null">, b_url, b_imgTitle</if>
 		) VALUES
 		(#{re_no}, #{b_title}, #{b_content},
 		(SELECT l_no FROM login
 		WHERE l_id=#{l_id})
-		<if test="b_file != null">, #{b_file}, #{b_img}</if>
+		<if test="b_url != null">, #{b_url}, #{b_imgTitle}</if>
 		)
 	</insert>
 
@@ -99,7 +99,7 @@
 	<update id="ubUpdate" parameterType="TestDTO">
 		UPDATE userBoardRegion SET re_no=#{re_no}, b_title=#{b_title},
 		b_content=#{b_content}, l_no=#{l_no}
-		<if test="b_file != null">, b_file=#{b_file}, b_img=#{b_img} </if>
+		<if test="b_url != ''">, b_url=#{b_url}, b_imgTitle=#{b_imgTitle} </if>
 		WHERE b_no=#{b_no};
 	</update>
 

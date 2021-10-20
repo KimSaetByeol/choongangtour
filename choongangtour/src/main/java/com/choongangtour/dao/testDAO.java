@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
+import com.choongangtour.common.CommandMap;
 import com.choongangtour.dto.TestDTO;
 
 @Repository("testDAO")
@@ -26,8 +27,8 @@ public class testDAO extends AbstractDAO {
 	}
 
 	////////////////////////// 아래로 쭉 샛별 userWrite 추가 1012
-	public void userWrite(TestDTO testDTO) {
-		insert("test.userWrite", testDTO);
+	public void userWrite(Map<String, Object> map) {
+		insert("test.userWrite", map);
 	}
 
 	public int totalCount(Map<String, Object> map) {
@@ -60,8 +61,8 @@ public class testDAO extends AbstractDAO {
 		return delete("test.ubDelete", map);
 	}
 
-	public void ubUpdate(TestDTO testDTO) {
-		update("test.ubUpdate", testDTO);
+	public void ubUpdate(Map<String, Object> map) {
+		update("test.ubUpdate", map);
 	}
 
 }

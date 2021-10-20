@@ -7,7 +7,7 @@
 <link
 	href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
 	rel="stylesheet">
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.6.0.js"></script>
 <script
 	src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
@@ -36,11 +36,34 @@ textarea {
 	height: 300px
 }
 </style>
+<script type="text/javascript">
+function fileToImgbb(){
+	var formData = new FormData($("#fileForm")[0]);
+	$.ajax({
+		url: "https://api.imgbb.com/1/upload",
+		method: "post",
+		contentType: false,
+		processData: false,
+		data: formData,
+		success: function(response){
+			alert("success!");
+			console.log(response);
+			var jx = response;
+			console.log(jx.data.url);
+			$("#b_url").val(jx.data.url);
+			$("#b_imgTitle").val(jx.data.title);
+		},
+		error: function(error){
+			alert("사진없음");
+		}
+	})
+}
+</script>
 </head>
 <body>
 	<h1>'${detail.b_title}' 게시글 수정</h1>
 	<div id="write">
-		<form action="./ubUpdate.do" enctype="multipart/form-data" method="post">
+		<form action="./ubUpdate.do" id="fileForm"  enctype="multipart/form-data" method="post">
 			<input type="hidden" name="l_no" value="${detail.l_no }">
 			<input type="hidden" name="b_no" value="${detail.b_no }">
 			<select name="region">
@@ -78,11 +101,15 @@ textarea {
 
 				});
 			</script>
-			<!-- <input type="file" name="file" accept="*" value="${detail.b_file }" /> -->
-			<input type="file" name="file" accept="*" />
-			<br>
+			
+			<input type="file" name="image" id="file" accept="*"/>
+			<button type="button" onclick="fileToImgbb()">파일 업로드</button>파일 선택 후 꼭 업로드 버튼을 눌러주세요<br>
+			<input type="hidden" name="key" value="f6d096ba35b6760c08fb692ed72043ad">
+			<input type="hidden" name="b_url" id="b_url">
+			<input type="hidden" name="b_imgTitle" id="b_imgTitle">
 			<button type="submit">수정하기</button>
 		</form>
+		<a href="userBoard.do">리스트로</a>
 	</div>
 </body>
 </html>

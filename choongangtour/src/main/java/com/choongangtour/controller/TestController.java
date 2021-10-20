@@ -9,9 +9,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -150,36 +153,18 @@ public class TestController {
 	}
 	
 	@RequestMapping(value="/userWrite", method=RequestMethod.POST)
-	public String userWrite(HttpServletRequest request, MultipartFile file) throws Exception {
-	
-		TestDTO testDTO = new TestDTO();
-		testDTO.setB_title(request.getParameter("b_title"));// 타이틀
-		testDTO.setB_content(request.getParameter("b_content"));// 내용
-		testDTO.setRe_no(util.str2Int2(request.getParameter("region")));//구역 
-		//jsp에 가져온 select option의 region 을 Re_no로 바꿈
-		
+	public String userWrite(HttpServletRequest request, CommandMap map) throws Exception {
 		HttpSession session = request.getSession();
 		if(session.getAttribute("l_id") == null) {
 			return "redirect: login.do";
 		}
-		testDTO.setL_id((String) session.getAttribute("l_id")); 
-		System.out.println("file:"+file.getOriginalFilename());
 		
-		if(file.getOriginalFilename() != "") {
-			String b_img = null;
-			b_img = (String) testDTO.setB_img(file.getOriginalFilename());
-			String realPath = sc.getRealPath("resources/img/userboard/"); //저장경로 구분을 위해 userboard 폴더 추가
-			System.out.println("realPath = " + realPath);
-			System.out.println("file = " + file);
-			String upfile = save.save(realPath, file); //db에는 이미지 이름 저장됨
-			
-			testDTO.setB_file(upfile);
-			
-			System.out.println("content: "+  request.getParameter("b_content"));
-			System.out.println("file : " + file.getOriginalFilename());
-			System.out.println("fileSize: " + file.getSize());
-		}
-		serviceImplements.userWrite(testDTO);
+		map.put("re_no", util.str2Int2(request.getParameter("region"))); //구역
+		map.put("l_id", (String) session.getAttribute("l_id"));
+
+		System.out.println("url : " + map.get("url"));
+		
+		serviceImplements.userWrite(map.getMap());
 		
 		return "redirect: userBoard.do";
 	}
@@ -224,7 +209,7 @@ public class TestController {
 		mv.addObject("paginationInfo", paginationInfo);
 		mv.addObject("pageNo", pageNo);
 		mv.addObject("totalCount", totalCount);
-		//어디가 문제죠?
+		
 		return mv;
 	}
 	
@@ -281,40 +266,23 @@ public class TestController {
 	}
 	
 	@RequestMapping(value="/ubUpdate", method=RequestMethod.POST)
-	public String ubUpdate(HttpServletRequest request, MultipartFile file) throws Exception {
-	
-		TestDTO testDTO = new TestDTO();
-		testDTO.setB_no(util.str2Int2(request.getParameter("b_no")));
-		testDTO.setL_no(util.str2Int2(request.getParameter("l_no")));
-		testDTO.setB_title(request.getParameter("b_title"));// 타이틀
-		testDTO.setB_content(request.getParameter("b_content"));// 내용
-		int re_no = testDTO.setRe_no(util.str2Int2(request.getParameter("region")));//구역 
-		//jsp에 가져온 select option의 region 을 Re_no로 바꿈
-		System.out.println("file : " + file.getOriginalFilename());
-		
+	public String ubUpdate(HttpServletRequest request, CommandMap map) throws Exception {
 		HttpSession session = request.getSession();
 		if(session.getAttribute("l_id") == null) {
 			return "redirect: login.do";
 		}
-		testDTO.setL_id((String) session.getAttribute("l_id")); 
 		
-		if(file.getOriginalFilename() != "") {
-			String b_img = null;
-			b_img = (String) testDTO.setB_img(file.getOriginalFilename());
-			String realPath = sc.getRealPath("resources/img/userboard/"); //저장경로 구분을 위해 userboard 폴더 추가
-			System.out.println("realPath = " + realPath);
-			System.out.println("file = " + file);
-			String upfile = save.save(realPath, file); //db에는 이미지 이름 저장됨
-			
-			testDTO.setB_file(upfile);
-			
-			System.out.println("content: "+  request.getParameter("b_content"));
-			System.out.println("file : " + file.getOriginalFilename());
-			System.out.println("fileSize: " + file.getSize());
-		}
-		serviceImplements.ubUpdate(testDTO);
+		map.put("re_no", util.str2Int2(request.getParameter("region"))); //구역
+		System.out.println("url : " + map.get("url"));
+		
+		serviceImplements.ubUpdate(map.getMap());
 		
 		return "redirect: userBoard.do";
+	}
+	
+	@RequestMapping(value="/testUpload.do", method=RequestMethod.GET)
+	public String test() {
+		return "testUpload";
 	}
 }
  

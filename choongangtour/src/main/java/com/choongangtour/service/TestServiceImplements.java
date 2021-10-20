@@ -34,8 +34,8 @@ public class TestServiceImplements implements TestService {
 	}
 
 	//////////////////////////아래로 쭉 샛별 userWrite 추가 1012
-	public void userWrite(TestDTO testDTO) {
-		dao.userWrite(testDTO);
+	public void userWrite(Map<String, Object> map) {
+		dao.userWrite(map);
 	}
 
 	public int totalCount(Map<String, Object> map) {
@@ -62,8 +62,8 @@ public class TestServiceImplements implements TestService {
 		dao.ubDelete(map);
 	}
 
-	public void ubUpdate(TestDTO testDTO) {
-		dao.ubUpdate(testDTO);
+	public void ubUpdate(Map<String, Object> map) {
+		dao.ubUpdate(map);
 	}
 
 }

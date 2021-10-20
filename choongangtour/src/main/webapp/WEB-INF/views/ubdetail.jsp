@@ -81,8 +81,8 @@ function ubDelete(b_no){
 			<button onclick="ublike(${detail.b_no}, 0)">💔</button>
 		</td></tr>
 		<tr><td colspan="2">
-			<c:if test="${detail.b_file ne null }">
-				<img alt="${detail.b_img }" src="./resources/img/userboard/${detail.b_file}"><br>
+			<c:if test="${detail.b_url ne null }">
+				<img alt="${detail.b_imgTitle }" src="${detail.b_url }"><br>
 			</c:if>
 			${detail.b_content }
 		</td></tr>
