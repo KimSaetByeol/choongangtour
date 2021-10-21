@@ -2,37 +2,48 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="test">
-	<select id="board" resultType="HashMap"> <!-- 상세정보 관광지 -->
-		select * from boardRegionview where re_no= #{re_no} and b_title =
-		#{b_title} and visi =#{visi}
+<select id="adminBoard"  resultType="HashMap"><!--  admin 에서 보여주는 게시판형 리스트 -->
+	select * from boardRegionview
 	</select>
-	<select id="board2" resultType="HashMap"><!-- 상세정보 이전 구역 관광지들 보여줌 -->
-		select * from boardRegionview2 where re_no= #{re_no} and visi =#{visi}
-		order by b_no
+	
+	<select id="adminModify" resultType="HashMap" parameterType="Integer"><!--  수정하기 페이지 보여주는 페이지 리스트 -->
+	select * 
+	from boardRegionview 
+	where b_no =#{b_no}
 	</select>
-
-	<insert id="adminWrite" parameterType="TestDTO">
-		INSERT INTO boardRegion (re_no, b_title, b_content, re_category,
-		<if test="b_file != null">b_file</if>
-		,
-		<if test="b_img != null">b_img</if>
-		) VALUES (#{re_no}, #{b_title}, #{b_content},
-		(select re_category from
-		region where re_no=#{re_no}),
-		<if test="b_file != null">#{b_file}</if>
-		,
-		<if test="b_img != null"> #{b_img}</if>
-		)
+	
+	<update id="adminUpdate" parameterType="HashMap" >
+	update boardRegion set re_category = (select re_category from region where re_no = #{re_no}), b_title=#{b_title}, b_content= #{b_content}, b_addr=#{b_addr}, b_web=#{b_web}, 
+	b_tele=#{b_tele}, b_time=#{b_time}, b_price=#{b_price}, b_tip= #{b_tip}, b_date= #{b_date},<if test="b_url != ''"> b_url=#{b_url}, b_imgTitle=#{b_imgTitle} </if> where b_no = #{b_no}
+	 </update>
+	
+	
+    <select id="board" resultType="HashMap"> <!--  상세정보 관광지 -->
+    select * from boardRegionview where re_no= #{re_no} and b_title = #{b_title} and visi =#{visi}
+    </select>
+    <select id="board2" resultType="HashMap"><!--  상세정보 이전 구역 관광지들 보여줌 -->
+    select * from boardRegionview2 where re_no= #{re_no} and visi =#{visi}  order by b_no
+    </select>
+	
+	<insert id="adminWrite" parameterType="HashMap">
+	INSERT INTO boardRegion (re_no, b_title, b_content, re_category, b_addr, b_web, 
+	b_tele, b_time, b_price, b_tip,<if test="b_url != null">b_url, b_imgTitle</if>) VALUES (#{re_no}, #{b_title}, #{b_content},
+	(select re_category from region where re_no=#{re_no}),  #{b_addr}, #{b_web},#{b_tele},#{b_time},#{b_price} ,#{b_tip} ,
+	 <if test="b_url != null"> #{b_url}, #{b_imgTitle}</if>)
 	</insert>
-
-	<insert id="adminWriteWithoutFile" parameterType="TestDTO">
-		INSERT INTO
-		boardRegion (re_no, b_title, b_content, re_category ) VALUES
-		(#{re_no}, #{b_title}, #{b_content},
-		(select re_category from region
-		where re_no=#{re_no}))
-	</insert>
-
+	
+	
+	
+	<update id="adminDelete"  parameterType="HashMap" >
+		update boardRegion set visi= 0 where b_no =#{b_no}
+	</update>
+	<update id="adminCancelDelete"  parameterType="HashMap" >
+		update boardRegion set visi= 1 where b_no =#{b_no}
+	</update>
+	
+	
+	
+	
 	<!-- 아래로 쭉 샛별 추가 1012 -->
 	<insert id="userWrite" parameterType="HashMap">
 		INSERT INTO userBoardRegion(re_no, b_title, b_content, l_no

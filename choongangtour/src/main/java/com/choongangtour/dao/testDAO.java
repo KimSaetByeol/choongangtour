@@ -13,9 +13,23 @@ public class testDAO extends AbstractDAO {
 	public List<Map<String, Object>> selectList(TestDTO dto) {
 		return (List<Map<String, Object>>) selectList("test.board", dto);
 	}
+	public List<Map<String, Object>> selectList() {
+		return selectList("test.adminBoard");
+	}
+	public List<Map<String, Object>> selectList(int b_no) {
+		return selectList("test.adminModify",b_no);
+		
+	}//파일 수정
+	public int update(Map<String, Object> map) {
+		return update("test.adminUpdate", map);
+	}
+	public void updateWithFile(Map<String, Object> map) {
+		update("test.adminUpdateWithFile", map);
+		
+	}
 
-	public int adminWrite(TestDTO dto) {
-		return insert("test.adminWrite", dto);
+	public int adminWrite(Map<String, Object> map) {
+		return insert("test.adminWrite", map);
 	}
 
 	public List<Map<String, Object>> selectList2(TestDTO dto) {
@@ -25,6 +39,15 @@ public class testDAO extends AbstractDAO {
 	public void adminWriteWithoutFile(TestDTO dto) {
 		insert("test.adminWriteWithoutFile", dto);
 	}
+	public void delete(Map<String, Object> map) {
+		update("test.adminDelete", map);
+	}
+	public void cancelDelete(Map<String, Object> map) {
+		update("test.adminCancelDelete", map);
+		
+	}
+
+
 
 	////////////////////////// 아래로 쭉 샛별 userWrite 추가 1012
 	public void userWrite(Map<String, Object> map) {

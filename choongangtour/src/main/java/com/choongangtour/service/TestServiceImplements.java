@@ -15,13 +15,12 @@ public class TestServiceImplements implements TestService {
 	Logger log = Logger.getLogger(this.getClass());
 	@Autowired
 	private testDAO dao;
-
 	public List<Map<String, Object>> selectList(TestDTO dto) {
 		return dao.selectList(dto);
 	}
 
-	public int adminWrite(TestDTO dto) {
-		return dao.adminWrite(dto);
+	public int adminWrite(Map<String, Object> map) {
+		return dao.adminWrite(map);
 	}
 
 	public List<Map<String, Object>> selectList2(TestDTO dto) {
@@ -31,6 +30,31 @@ public class TestServiceImplements implements TestService {
 	public void adminWriteWithoutFile(TestDTO dto) {
 		dao.adminWriteWithoutFile(dto);
 
+	}
+
+	public List<Map<String, Object>> selectList() {
+		return dao.selectList();
+	}
+	
+	public List<Map<String, Object>> selectList(int b_no) {
+		
+		return dao.selectList(b_no);
+	}
+	
+	public int adminUpdate(Map<String, Object> map) {
+		return dao.update(map);
+		
+	}
+	public void adminUpdateWithFile(Map<String, Object> map) {
+		dao.updateWithFile(map);
+	}
+	public void adminDelete(Map<String, Object> map) {
+		dao.delete(map);
+	}
+
+	public void adminCancelDelete(Map<String, Object> map) {
+		dao.cancelDelete(map);
+		
 	}
 
 	//////////////////////////아래로 쭉 샛별 userWrite 추가 1012

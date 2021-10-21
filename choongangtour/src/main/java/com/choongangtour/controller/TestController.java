@@ -1,5 +1,6 @@
 package com.choongangtour.controller;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -14,9 +15,11 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -75,42 +78,11 @@ public class TestController {
 		return "write";
 	}
 	@RequestMapping(value="/write", method=RequestMethod.POST)
-	public String adminWrite(HttpServletRequest request, MultipartFile file ) throws Exception {
-	
-		TestDTO testDTO = new TestDTO();
-		testDTO.setB_title(request.getParameter("b_title"));// 관광지
-		testDTO.setB_content(request.getParameter("b_content"));// 상세정보 
-		testDTO.setB_addr(request.getParameter("b_addr"));
-		testDTO.setB_tele(request.getParameter("b_tele"));
-		testDTO.setB_web(request.getParameter("b_web"));
-		testDTO.setB_time(request.getParameter("b_time"));
-		testDTO.setB_price(request.getParameter("b_price"));
-		testDTO.setB_tip(request.getParameter("b_tip"));
-		int re_no = testDTO.setRe_no(util.str2Int2(request.getParameter("region")));//구역 
-		//jsp에 가져온 select option의 region 을 Re_no로 바꿈
-		
-		testDTO.setL_no(1);// 관리자만 사용함. 관광세부정보 작성자
-		
-		String b_img = (String) testDTO.setB_img(file.getOriginalFilename());
-		String realPath = sc.getRealPath("resources/img/");// 저장경로인데 다시 이것을 갖다쓰는 것은 안되서 수동으로 일일히 넣어줌 
-		System.out.println(realPath);
-		System.out.println(file);
-		String upfile = save.save(realPath, file); //db에는 이미지 이름 저장됨
-		
-		testDTO.setB_file(upfile);
-		
-		System.out.println("content: "+  request.getParameter("sb_content"));
-		System.out.println("file : " + file.getOriginalFilename());
-		System.out.println("fileSize: " + file.getSize());
-
-		
-		if (b_img != null) {
-			serviceImplements.adminWrite(testDTO); //이미지 구분하려고 했는데 test_sql(mapper)에서 if문 또 써서 굳이 여기서 if문 안써도 될듯
-			
-		}else {
-			serviceImplements.adminWriteWithoutFile(testDTO);
-
-		}
+	public String adminWrite(HttpServletRequest request,  CommandMap map) throws Exception {
+		int re_no = util.str2Int2(request.getParameter("region"));
+		map.put("re_no", util.str2Int2(request.getParameter("region"))); //구역
+		System.out.println("map : " + map.getMap());
+		serviceImplements.adminWrite(map.getMap());
 		
 		return "redirect: boardRegion.do?re_no=" + re_no;
 		
@@ -127,11 +99,15 @@ public class TestController {
 		return "touristSites";
 	}
 	@GetMapping("/adminPage")
-	public String adminPage(HttpServletRequest req) {
+	public ModelAndView adminPage(HttpServletRequest req) {//아드민에서 글 다 띄우기
+		ModelAndView mv = new ModelAndView("adminPage");
+			
+		List<Map<String, Object>> list = serviceImplements.selectList();
 		
-		String path = req.getContextPath();
-		System.out.println(path);
-		return "adminPage";
+		
+		
+		mv.addObject("list", list);
+		return mv;
 	}
 	@GetMapping("/busanMtMap")
 	public String busanMtMap(HttpServletRequest request) {
@@ -139,6 +115,46 @@ public class TestController {
 
 		return "busanMtMap";
 	}
+	@GetMapping("/adminModify")// 수정하기 화면만 보여주기
+	public ModelAndView adminModify(HttpServletRequest request) {
+		int b_no  = util.str2Int2(request.getParameter("b_no"));
+		ModelAndView mv = new ModelAndView("adminModify");
+		TestDTO dto = new TestDTO();
+		b_no = dto.setB_no(b_no);
+		System.out.println(b_no);//오는거 홧인
+		List<Map<String, Object>> list = serviceImplements.selectList(b_no);//선택한 항목 list다 띄어주고
+		mv.addObject("list", list);	
+		return mv;
+	}
+	@PostMapping("/adminModify")
+	public String adminUpdate(CommandMap map,HttpServletRequest sr)throws IOException	{
+		TestDTO testDTO = new TestDTO();
+		int re_no = testDTO.setRe_no(util.str2Int2(sr.getParameter("region")));//구역 
+		map.put("re_no", re_no);
+		int b_no =util.str2Int2(sr.getParameter("b_no"));
+		map.put("b_no", b_no);
+
+	
+			serviceImplements.adminUpdate(map.getMap());
+			
+		
+		return "redirect: adminPage.do";//"redirect: adminPage.do"
+		
+		
+	}
+	@RequestMapping("/adminDelete.do")
+	public String adminDelete(Map<String, Object> map, @RequestParam("b_no") int b_no) {
+		map.put("b_no", b_no);
+		serviceImplements.adminDelete(map);
+		return "redirect: adminPage.do";//"redirect: adminPage.do"
+	}
+	@RequestMapping("/adminCancelDelete.do")
+	public String adminCancelDelete(Map<String, Object> map, @RequestParam("b_no") int b_no) {
+		map.put("b_no", b_no);
+		serviceImplements.adminCancelDelete(map);
+		return "redirect: adminPage.do";//"redirect: adminPage.do"
+	}
+	
 	
 	//////////////////////////아래로 쭉 샛별 userWrite 추가
 	

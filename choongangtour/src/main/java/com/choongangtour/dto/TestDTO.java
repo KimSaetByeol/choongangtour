@@ -1,15 +1,18 @@
 package com.choongangtour.dto;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class TestDTO {
 	private int b_no, l_no, re_no, visi;
 	//샛별추가 1012
 	private int b_like;
 	
 	private String b_img, b_file, b_title, b_content, b_date, l_id, re_category, b_addr, b_tele, b_time, b_price ,b_tip, b_web ;
-	
 	public String getB_addr() {
 		return b_addr;
 	}
+
+
 
 	public void setB_addr(String b_addr) {
 		this.b_addr = b_addr;
@@ -83,8 +86,8 @@ public class TestDTO {
 		return b_no;
 	}
 
-	public void setB_no(int b_no) {
-		this.b_no = b_no;
+	public int setB_no(int b_no) {
+		return this.b_no = b_no;
 	}
 
 	public int getL_no() {
@@ -100,8 +103,8 @@ public class TestDTO {
 		return b_file;
 	}
 
-	public void setB_file(String b_file) {
-		this.b_file = b_file;
+	public String setB_file(String b_file) {
+		return this.b_file = b_file;
 	}
 
 	public String getB_img() {

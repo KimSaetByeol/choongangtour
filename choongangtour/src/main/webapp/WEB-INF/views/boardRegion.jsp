@@ -43,12 +43,22 @@ img {
 }
 
 #content {
-	position: relative;
+position: relative;
 }
 
 #contextText {
-	position: relative;
 	font-size: 15pt;
+	position: relative;
+}
+#box{
+ width: calc(100% - 40px) auto ;
+ height: auto;
+ margin: 30px auto 0px;
+  padding: 10px 20px;
+  border: 1px solid #bfbfbf;
+ clear: both;
+ background-color: #fafafa;
+    color: #081e52;
 }
 
 </style>
@@ -69,8 +79,6 @@ img {
 			<a href="./boardRegion.do?re_no=${param.re_no }&b_title=${param.b_title}">상세정보</a> &ensp;&ensp;
 			<a href="./busanMtMap.do?re_no=${param.re_no }&b_title=${param.b_title}">지도</a> &ensp;&ensp;<!--  re_no를 request로 받아와서 mv로 가져오기 -->
 			<a href="./boardRegion.do?re_no=${param.re_no }">주변 관광지</a> &ensp;&ensp;<!--  re_no를 request로 받아와서 mv로 가져오기 -->
-			<a>여행사진</a>&ensp;&ensp;
-			<a>리뷰</a>
 		</div>
 		
 		</c:if>
@@ -84,19 +92,23 @@ img {
 			<div id="list2,rightBeforeDetailSeparatedBySites 부산 황령산 / 서울 남산타워" style="border: 2px solid black">
 			<!--  select * from boardRegionview2 where re_no= #re_no and visi =#visi  order by b_no 부산에 있는 관광지(3번지) (6번지) (7번지로 지정했음) 들을 찾아라 -->
 			
-				<h2>${list2[3].b_title} </h2> <img alt="" src="./resources/img/${list2[3].b_img }"  height="600px" onclick="location.href='boardRegion.do?re_no=${list2[0].re_no}&b_title=${list2[0].b_title}'"> <!-- 부산 황령산 이미지-->
+				<h2>${list2[3].b_title} </h2> <img alt="" src="${list2[3].b_url }"  height="600px" onclick="location.href='boardRegion.do?re_no=${list2[0].re_no}&b_title=${list2[0].b_title}'"> <!-- 부산 황령산 이미지-->
 			</div><br>
+			
+			<c:if test="${list2[6].b_title != null}"><!-- 만약 관광지가 있다면 -->
 			<div id="list2,rightBeforeDetailSeparatedBySites 부산 호천마을/ " style="border: 2px solid black">
-			
-				<h2>${list2[6].b_title} </h2> <img alt="" src="./resources/img/${list2[6].b_img }"  height="600px" onclick="location.href='boardRegion.do?re_no=${list2[6].re_no}&b_title=${list2[6].b_title}'"> <!--광안리 이미지-->
+				<h2>${list2[6].b_title} </h2> <img alt="" src="${list2[6].b_url }"  height="600px" onclick="location.href='boardRegion.do?re_no=${list2[6].re_no}&b_title=${list2[6].b_title}'"> <!--광안리 이미지-->
 			</div><br>
+			
+			</c:if>
+			<c:if test="${list2[7].b_title != null}"> <!-- 만약 관광지가 있다면 -->
 			<div id="list2,rightBeforeDetailSeparatedBySites 부산 해운대 / " style="border: 2px solid black">
-			
-				<h2>${list2[7].b_title}<!--  해운대 -->  </h2> <img alt="" src="./resources/img/${list2[7].b_img}"  height="600px" onclick="location.href='boardRegion.do?re_no=${list2[7].re_no}&b_title=${list2[9].b_title}'"> <!-- 부산 호천마을 이미지-->
+				<h2>${list2[7].b_title}<!--  해운대 -->  </h2> <img alt="" src="${list2[7].b_url}"  height="600px" onclick="location.href='boardRegion.do?re_no=${list2[7].re_no}&b_title=${list2[7].b_title}'"> <!-- 부산 호천마을 이미지-->
 			</div><br>
-	
+			</c:if>
+			
+	</c:if>
 				
-		</c:if>
 		
 		</div>
 		
@@ -112,8 +124,9 @@ img {
 		
 		<c:forEach items="${list }" var="l">
 		<c:choose>
-			<c:when test="${l.b_img != null}"> <br>  <!--  이미지 있으면 보여주고  -->
-		<img alt="" src="./resources/img/${l.b_img }">
+			<c:when test="${l.b_url != null}"> <br>  <!--  이미지 있으면 보여주고  -->
+				<img alt="img" src="${l.b_url }">
+						<!--  data insrt after mpdofy -->
 				
 			</c:when>
 		
@@ -133,16 +146,104 @@ img {
 				</table>
 			</div>
 		</c:forEach>
+		<c:if test="${param.b_title != null }">
+			<div id= box>
+<table> 
+				<tr valign="top">
+				<th>주 소</th>
+				
+					<td>${list[0].b_addr } </td>
+				</tr> 
+				
+				<tr valign="top">
+				<th> 홈페이지 </th>
+					<td>${list[0].b_web} </td>
+				</tr> 
+				<tr valign="top">
+				<th> 전화번호</th>
+					<td>${list[0].b_tele} </td>
+				</tr> 
+				<tr valign="top">
+				<th>이용시간</th>
+					<td>${list[0].b_time } </td>
+				</tr> 
+				<tr valign="top">
+				<th>이용요금</th>
+					<td>${list[0].b_price }</td>
+				</tr> 
+				<tr valign="top">
+				<th>기타 정보 </th>
+					<td> ${list[0].b_tip } </td>
+				</tr> 
+			
+				
+		
+</table>
+		
 
+		</div>
+		</c:if>
+	<br>
 						
 						<div id="citations" style="float: right"> <!--  출저 보여주기  -->
-						<c:if test="${param.re_no == 20 }"> <!--  부산이면 -->
-							출저 : <a href="https://www.visitbusan.net/kr/index.do"> https://www.visitbusan.net/kr/index.do</a>
-						</c:if>
+						
 						<c:if test="${param.re_no == 1 }"> <!--  서울이면  -->
 							출저 : <a href="https://korean.visitseoul.net/index">https://korean.visitseoul.net/index</a>
 						</c:if>
+						<c:if test="${param.re_no == 2}"> <!--  경기도-->
+							출저 : <a href="https://grand.ggtour.or.kr/">https://grand.ggtour.or.kr/</a>
+						</c:if>
+						<c:if test="${param.re_no == 3}"> <!--  강원-->
+							출저 : <a href="https://www.gangwon.to/gwtour">https://www.gangwon.to/gwtour</a>
+						</c:if>
+						<c:if test="${param.re_no == 4}"> <!--  인천-->
+							출저 : <a href="https://itour.incheon.go.kr/">https://itour.incheon.go.kr/</a>
+						</c:if>
+						<c:if test="${param.re_no == 5}"> <!--  세종-->
+							출저 : <a href="https://www.sejong.go.kr/">https://www.sejong.go.kr/</a>
+						</c:if>
+						<c:if test="${param.re_no == 6}"> <!--  경북-->
+							출저 : <a href="https://tour.gb.go.kr/">https://tour.gb.go.kr/</a>
+						</c:if>
+						<c:if test="${param.re_no == 7}"> <!--  경남-->
+							출저 : <a href="https://tour.gyeongnam.go.kr/">https://tour.gyeongnam.go.kr/</a>
+						</c:if>
+						<c:if test="${param.re_no == 8}"> <!--  전북-->
+							출저 : <a href="https://tour.jb.go.kr/">https://tour.jb.go.kr/</a>
+						</c:if>
+						<c:if test="${param.re_no == 9}"> <!--  전남-->
+							출저 : <a href="https://www.namdokorea.com/">https://www.namdokorea.com/</a>
+						</c:if>
+						<c:if test="${param.re_no == 10}"> <!--  충북-->
+							출저 : <a href="https://tour.chungbuk.go.kr/www/index.do">https://tour.chungbuk.go.kr/www/index.do</a>
+						</c:if>
+						<c:if test="${param.re_no == 11}"> <!--  충남-->
+							출저 : <a href="https://tour.chungnam.go.kr/">https://tour.chungnam.go.kr/</a>
+						</c:if>
 						</div>
+						<c:if test="${param.re_no == 12}"> <!--  대구-->
+							출저 : <a href="https://tour.daegu.go.kr/">https://tour.daegu.go.kr/</a>
+						</c:if>
+						<c:if test="${param.re_no == 13}"> <!--  대전-->
+							출저 : <a href="https://www.daejeon.go.kr/tou/index.do">https://www.daejeon.go.kr/tou/index.do</a>
+						</c:if>
+						<c:if test="${param.re_no == 14}"> <!--  울산-->
+							출저 : <a href="https://tour.ulsan.go.kr/">https://tour.ulsan.go.kr/</a>
+						</c:if>
+						<c:if test="${param.re_no == 15}"> <!--  독도-->
+							출저 : <a href="https://dokdo.mofa.go.kr/kor/">https://dokdo.mofa.go.kr/kor/</a>
+						</c:if>
+						<c:if test="${param.re_no == 16}"> <!--  울릉-->
+							출저 : <a href="http://ulleung.go.kr/">http://ulleung.go.kr/</a>
+						</c:if>
+						<c:if test="${param.re_no == 17}"> <!--  광주-->
+							출저 : <a href="https://www.gjcity.go.kr/tour/contents.do?mId=0101010100">https://www.gjcity.go.kr/tour/contents.do?mId=0101010100 </a>
+						</c:if>
+						<c:if test="${param.re_no == 20 }"> <!--  부산이면 -->
+							출저 : <a href="https://www.visitbusan.net/kr/index.do"> https://www.visitbusan.net/kr/index.do</a>
+						</c:if>
+						</div>
+						
 
 	<div id="footer">
 	
