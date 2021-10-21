@@ -44,4 +44,8 @@ public class LoginServiceImpl implements LoginService {
 	public String checkName(Map<String, Object> map) {
 		return loginDAO.checkName(map);
 	}
+	
+	public void typeSave(Map<String, Object> map) {
+		loginDAO.typeSave(map);
+	}
 }

@@ -8,16 +8,112 @@
 <title>travelTest</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="./resources/js/typeList.js"></script>
-<script type="text/javascript" src="./resources/js/travelTest.js"></script>
 <link rel="stylesheet" href="./resources/css/travelTest.css">
 <script type="text/javascript">
-			$(document).ready(function() {
-				$("#save").click(function() {
-					
-					alert(result);
-				});
-			});
-			</script>
+var l_type = "88";
+const endPoint = 6;
+const select = [0, 0, 0, 0, 0, 0];
+
+window.onload = function() {
+	
+	function calResult() {
+		l_type = select.indexOf(Math.max(...select));
+		console.log(l_type);
+		return l_type;
+	}
+
+	//결과페이지 띄우는 함수
+	function setResult() {
+		let point = calResult();
+		const resultName = document.querySelector(".resultname");
+		resultName.innerHTML = resultList[point].name;
+
+		const resultDesc = document.querySelector(".resultDesc");
+		resultDesc.innerHTML = resultList[point].desc;
+
+	}
+	
+	//결과페이지 가는 함수
+	function goResult() {
+		$("#test").hide();
+		$("#result").show();
+		setResult();
+	}
+
+	//답변란 함수
+	function aList(ansT, count, idx) {
+		var a = document.querySelector(".aBox");
+		var answer = document.createElement("button");
+		answer.classList.add("answerList");
+		a.appendChild(answer);
+		answer.innerHTML = ansT;
+
+		answer.addEventListener("click", function() {
+			var list = document.querySelectorAll(".answerList")
+			for (i = 0; i < list.length; i++) {
+				list[i].disabled = true;
+				list[i].style.display = "none";
+			}
+			var target = testList[count].a[idx].type;
+			for (i = 0; i < target.length; i++) {
+				select[target[i]] += 1;
+			}
+
+			qList(++count);
+		}, false);
+	}
+
+	//질문란 함수
+	function qList(count) {
+		if (count === endPoint) {
+			goResult();
+			return;
+		}
+
+		var q = document.querySelector(".qBox");
+		q.innerHTML = testList[count].q;
+		for (let i in testList[count].a) {
+			aList(testList[count].a[i].answer, count, i);
+		}
+
+		var status = document.querySelector(".statusBar");
+		status.style.width = (100 / endPoint) * (count + 1) + "%";
+	}
+	let count = 0;
+	qList(count);
+}
+
+
+//ajax를 여기에
+function clickB(){
+	$.ajax({
+		url : "./travelTest.do",
+		type : "post",
+		cache : false,
+		data : {'l_type' : l_type},
+		success : function(save){
+			alert("저장되었습니다.");
+		},
+		error : function(){
+			alert("에러가 발생했습니다.");
+		}
+	});
+	return false;
+}
+
+function noo(){
+	alert("로그인 후 이용해주세요.");
+	location.href = "login.do";
+	return false;
+}
+
+//테스트페이지 가는 함수
+function goTest() {
+	$("#main").hide();
+	$("#test").show();
+}
+
+</script>
 </head>
 <body>
 	<div>
@@ -27,8 +123,16 @@
 			<p>
 				간단한 테스트를 통해<br> 나와 어울리는 여행지를 찾아볼까요?
 			</p>
+			<c:choose>
+			<c:when test="${sessionScope.l_id ne null }">
 			<input type="button" value="시작" class="btn"
-				onclick="document.body.className='start'">
+				onclick="goTest()">
+			</c:when>
+			<c:otherwise>
+			<input type="button" value="시작" class="btn"
+				onclick="return noo()">
+			</c:otherwise>
+		</c:choose>
 		</section>
 
 		<section id="test">
@@ -43,9 +147,9 @@
 			<h1>당신의 결과는?</h1>
 			<div class="resultname"></div>
 			<div class="resultDesc"></div>
-			<button type="submit" id="save" class="btn2">결과 저장하기</button>
+			<button class="btn2" onclick="return clickB()">결과 저장하기</button>
 			<br>
-			<button onclick="location.href='./'"class="btn2">메인페이지 돌아가기</button>
+			<button onclick="location.href='./'" class="btn2">메인페이지 돌아가기</button>
 		</section>
 	</div>
 </body>

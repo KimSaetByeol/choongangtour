@@ -1,7 +1,7 @@
 package com.choongangtour.web.user.model;
 
 public class UserVO {
-		String l_no, l_id, l_name, l_pw, l_email, l_grade, l_joindate;
+		String l_no, l_id, l_name, l_pw, l_email, l_grade, l_joindate, l_type;
 
 
 	public String getL_no() {
@@ -72,11 +72,20 @@ public class UserVO {
 		public void setL_joindate(String l_joindate) {
 			this.l_joindate = l_joindate;
 		}
+		
+		public String getL_type() {
+			return l_type;
+		}
+
+
+		public void setL_type(String l_type) {
+			this.l_type = l_type;
+		}
 
 
 	@Override 
 	public String toString() { 
-		return "UserVO [l_no=" + l_no + ", l_id=" + l_id + ", l_name=" + l_name + ", l_pw=" + l_pw + ", l_email=" + l_email + ", l_grade=\" + l_grade + \", l_joindate=" + l_joindate + "]";
+		return "UserVO [l_no=" + l_no + ", l_id=" + l_id + ", l_name=" + l_name + ", l_pw=" + l_pw + ", l_email=" + l_email + ", l_grade=\" + l_grade + \", l_joindate=" + l_joindate + ", l_type=" + l_type +"]";
 		
 	}
 

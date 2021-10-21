@@ -47,10 +47,10 @@
 		l_email=#{l_email}
 	</select>
 
-	<update id="typeSave">
+	<update id="typeSave" parameterType="HashMap">
 		UPDATE login
-		SET l_type = {#type}
-		WHERE l_id = #{id}
+		SET l_type = #{l_type}
+		WHERE l_id = #{l_id}
 	</update>
 	
 </mapper>

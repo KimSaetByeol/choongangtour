@@ -1,6 +1,5 @@
 package com.choongangtour.controller;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -11,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -24,6 +24,7 @@ public class LoginController {
 	private LoginServiceImpl loginService;
 	
 	//로그인 확인용 맵핑입니다 추후 삭제예정!
+	//삭제 안하구 그냥 써도 될까요???ㅜㅜ
 	@GetMapping("/infobox.do")
 	public String infobox() {
 		return "infobox";
@@ -187,9 +188,12 @@ public class LoginController {
 		return "travelTest";
 	}
 	
-	@PostMapping("/travelTest.do")
-	public ModelAndView typeSave(CommandMap commandMap) {
-		ModelAndView mv = new ModelAndView();
-		return mv;
+	@RequestMapping(value="/travelTest.do", method=RequestMethod.POST)
+	public @ResponseBody String typeSave(CommandMap commandMap, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+			commandMap.put("l_id", session.getAttribute("l_id"));
+			loginService.typeSave(commandMap.getMap());
+			
+		return "/travelTest.do";
 }
 }
