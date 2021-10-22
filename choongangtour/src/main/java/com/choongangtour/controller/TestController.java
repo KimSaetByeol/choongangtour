@@ -44,8 +44,7 @@ public class TestController {
 	@Autowired
 	private Util util;
 
-	//.do로 보내서 그렇습니다.
-	//모든 맵핑은 디오로 본내고 받아야 하니까요. 
+	
 
 	@RequestMapping( value = "/boardRegion.do", produces="text/plain; charset=UTF-8", method=RequestMethod.GET)
 	public ModelAndView boardRegion(HttpServletRequest request)  { //보드 리스트 다 보여주기 
@@ -67,7 +66,7 @@ public class TestController {
 		List<Map<String, Object>> list2 = serviceImplements.selectList2(dto);
 		System.out.println("list: " + list);
 		mv.addObject("list", list);// 상세보기
-		mv.addObject("list2", list2);// 관광지 상세보기 이전 페이지
+		mv.addObject("list2", list2);// 주변 관광지 상세보기 이전 페이지
 		
 	return mv; 
 	}
@@ -109,11 +108,11 @@ public class TestController {
 		mv.addObject("list", list);
 		return mv;
 	}
-	@GetMapping("/busanMtMap")
-	public String busanMtMap(HttpServletRequest request) {
+	@GetMapping("/regionMap")
+	public String regionMap(HttpServletRequest request) {
 		
 
-		return "busanMtMap";
+		return "regionMap";
 	}
 	@GetMapping("/adminModify")// 수정하기 화면만 보여주기
 	public ModelAndView adminModify(HttpServletRequest request) {

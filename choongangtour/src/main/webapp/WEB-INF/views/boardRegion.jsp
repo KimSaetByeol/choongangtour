@@ -77,7 +77,7 @@ position: relative;
 	<!--  menu 바  -->
 		<div id="menu" style="text-align: center">
 			<a href="./boardRegion.do?re_no=${param.re_no }&b_title=${param.b_title}">상세정보</a> &ensp;&ensp;
-			<a href="./busanMtMap.do?re_no=${param.re_no }&b_title=${param.b_title}">지도</a> &ensp;&ensp;<!--  re_no를 request로 받아와서 mv로 가져오기 -->
+			<a href="./regionMap.do?re_no=${param.re_no }&b_title=${param.b_title}">지도</a> &ensp;&ensp;<!--  re_no를 request로 받아와서 mv로 가져오기 -->
 			<a href="./boardRegion.do?re_no=${param.re_no }">주변 관광지</a> &ensp;&ensp;<!--  re_no를 request로 받아와서 mv로 가져오기 -->
 		</div>
 		
@@ -90,20 +90,20 @@ position: relative;
 			 <c:if test="${fn:length(list) == 0 }"> <!--  상세정보값 없으면 이거 띄우기  (상세정보 페이지에 이거 안 보이게 할려고)-->
 				<h1 style="font-size: xxx-large; font-weight: bold;">${list2[0].re_category }</h1> <!-- 각 행정구역  re_category-->
 			<div id="list2,rightBeforeDetailSeparatedBySites 부산 황령산 / 서울 남산타워" style="border: 2px solid black">
-			<!--  select * from boardRegionview2 where re_no= #re_no and visi =#visi  order by b_no 부산에 있는 관광지(3번지) (6번지) (7번지로 지정했음) 들을 찾아라 -->
-			
-				<h2>${list2[3].b_title} </h2> <img alt="" src="${list2[3].b_url }"  height="600px" onclick="location.href='boardRegion.do?re_no=${list2[0].re_no}&b_title=${list2[0].b_title}'"> <!-- 부산 황령산 이미지-->
+			<!--  select * from boardRegionview2 where re_no= #re_no and visi =#visi  order by b_no 지역에 있는 관광지(3번지) (6번지) (7번지로 지정했음) 들을 찾아라 -->
+			<!--  각 지역(region)에는 보여주는 게시물이 4(단락)/3/4  총(10~12) 게시물(단락)으로  구성되어 있고, 이것에 따라 n번지의 이미지를 미리보기 할 수 있음  -->
+				<h2>${list2[3].b_title} </h2> <img alt="" src="${list2[3].b_url }"  height="600px" onclick="location.href='boardRegion.do?re_no=${list2[0].re_no}&b_title=${list2[0].b_title}'"> <!-- region에 있는 0번지의 이미지-->
 			</div><br>
 			
 			<c:if test="${list2[6].b_title != null}"><!-- 만약 관광지가 있다면 -->
 			<div id="list2,rightBeforeDetailSeparatedBySites 부산 호천마을/ " style="border: 2px solid black">
-				<h2>${list2[6].b_title} </h2> <img alt="" src="${list2[6].b_url }"  height="600px" onclick="location.href='boardRegion.do?re_no=${list2[6].re_no}&b_title=${list2[6].b_title}'"> <!--광안리 이미지-->
+				<h2>${list2[6].b_title} </h2> <img alt="" src="${list2[6].b_url }"  height="600px" onclick="location.href='boardRegion.do?re_no=${list2[6].re_no}&b_title=${list2[6].b_title}'"> <!-- region에 있는 6번지의 이미지-->
 			</div><br>
 			
 			</c:if>
 			<c:if test="${list2[7].b_title != null}"> <!-- 만약 관광지가 있다면 -->
 			<div id="list2,rightBeforeDetailSeparatedBySites 부산 해운대 / " style="border: 2px solid black">
-				<h2>${list2[7].b_title}<!--  해운대 -->  </h2> <img alt="" src="${list2[7].b_url}"  height="600px" onclick="location.href='boardRegion.do?re_no=${list2[7].re_no}&b_title=${list2[7].b_title}'"> <!-- 부산 호천마을 이미지-->
+				<h2>${list2[7].b_title}<!--  해운대 -->  </h2> <img alt="" src="${list2[7].b_url}"  height="600px" onclick="location.href='boardRegion.do?re_no=${list2[7].re_no}&b_title=${list2[7].b_title}'">  <!-- region에 있는 7번지의 이미지-->
 			</div><br>
 			</c:if>
 			
@@ -126,7 +126,6 @@ position: relative;
 		<c:choose>
 			<c:when test="${l.b_url != null}"> <br>  <!--  이미지 있으면 보여주고  -->
 				<img alt="img" src="${l.b_url }">
-						<!--  data insrt after mpdofy -->
 				
 			</c:when>
 		
@@ -149,7 +148,7 @@ position: relative;
 		<c:if test="${param.b_title != null }">
 			<div id= box>
 <table> 
-				<tr valign="top">
+				<tr valign="top"> <!--  이것또한 상단 이미지 미리보기와 같게 region의 첫번쨰 게시물에 있는 정보만 보여주게 한다.  -->
 				<th>주 소</th>
 				
 					<td>${list[0].b_addr } </td>
@@ -183,8 +182,7 @@ position: relative;
 
 		</div>
 		</c:if>
-	<br>
-						
+						<!--  맨 아래에 있는 출저 -->
 						<div id="citations" style="float: right"> <!--  출저 보여주기  -->
 						
 						<c:if test="${param.re_no == 1 }"> <!--  서울이면  -->
@@ -243,6 +241,7 @@ position: relative;
 							출저 : <a href="https://www.visitbusan.net/kr/index.do"> https://www.visitbusan.net/kr/index.do</a>
 						</c:if>
 						</div>
+	<br>
 						
 
 	<div id="footer">
@@ -250,7 +249,6 @@ position: relative;
 					
 	
 					
-	</div>
 	</div>
 	</div>
 

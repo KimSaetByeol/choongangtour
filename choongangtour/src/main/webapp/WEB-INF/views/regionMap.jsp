@@ -61,21 +61,20 @@ img {
 	<div id="main">
 		<div id="menu" style="text-align: center">
 			<a href="./boardRegion.do?re_no=${param.re_no }&b_title=${param.b_title}">상세정보</a> &ensp;&ensp;
-			<a href="./busanMtMap.do?re_no=${param.re_no }&b_title=${param.b_title}">지도</a> &ensp;&ensp;<!--  re_no를 request로 받아와서 mv로 가져오기 -->
+			<a href="./regeionMap.do?re_no=${param.re_no }&b_title=${param.b_title}">지도</a> &ensp;&ensp;<!--  re_no를 request로 받아와서 mv로 가져오기 -->
 			<a href="./boardRegion.do?re_no=${param.re_no }">주변 관광지</a> &ensp;&ensp;<!--  re_no를 request로 받아와서 mv로 가져오기 -->
 		</div>
 		<hr>
 		<!--  줄 ---------------------------------------------------- -->
 		<!--  1st paragraph---------------------------------------------------- -->
 
-			<h2>지도/주변 관광지</h2>
+			<h2>지도</h2>
 				<!--  카카오 맵 aPI -->
 		<div id="map" style="width:100%;height:680px;">
-		<p>
-			<button onclick="zoom()">지도레벨 - 1</button>
-		    <button onclick="zoomOut()">지도레벨 + 1</button>
+	
+		
 		    <span id="maplevel"></span>
-  	  </p>
+  	 
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ba29d96d2195f040d2c4e879a466cb6d"></script>
 	<script>
 	
@@ -430,8 +429,51 @@ img {
 		}
 	</script>
 	</div>
+		<button onclick="zoom()">확대</button>
+		    <button onclick="zoomOut()">축소</button>
+		    <button onclick="setOverlayMapTypeId('traffic')">교통정보 보기</button> 
+<button onclick="setOverlayMapTypeId('roadview')">로드뷰 도로정보 보기</button> 
+<button onclick="setOverlayMapTypeId('terrain')">지형정보 보기</button>
 	</div>
+<script type="text/javascript">
 
+//지도에 추가된 지도타입정보를 가지고 있을 변수입니다
+var currentTypeId;
+
+//버튼이 클릭되면 호출되는 함수입니다
+function setOverlayMapTypeId(maptype) {
+ var changeMaptype;
+ 
+ // maptype에 따라 지도에 추가할 지도타입을 결정합니다
+ if (maptype === 'traffic') {            
+     
+     // 교통정보 지도타입
+     changeMaptype = kakao.maps.MapTypeId.TRAFFIC;     
+     
+ } else if (maptype === 'roadview') {        
+     
+     // 로드뷰 도로정보 지도타입
+     changeMaptype = kakao.maps.MapTypeId.ROADVIEW;    
+
+ } else if (maptype === 'terrain') {
+     
+     // 지형정보 지도타입
+     changeMaptype = kakao.maps.MapTypeId.TERRAIN;    
+
+ }
+ 
+ // 이미 등록된 지도 타입이 있으면 제거합니다
+ if (currentTypeId) {
+     map.removeOverlayMapTypeId(currentTypeId);    
+ }
+ 
+ // maptype에 해당하는 지도타입을 지도에 추가합니다
+ map.addOverlayMapTypeId(changeMaptype);
+ 
+ // 지도에 추가된 타입정보를 갱신합니다
+ currentTypeId = changeMaptype;        
+}
+</script>
 
 </body>
 </html>
