@@ -21,6 +21,12 @@
 		count(*) FROM loginview WHERE l_id=#{l_id}
 	</select>
 
+	<select id="infobox" parameterType="HashMap" resultType="HashMap">
+		SELECT *
+		FROM login
+		WHERE l_id=#{l_id}
+	</select>
+	
 	<select id="myinfo" parameterType="HashMap" resultType="HashMap">
 		SELECT *
 		FROM login WHERE l_id=#{l_id} AND l_pw=#{l_pw}

@@ -23,11 +23,16 @@ public class LoginController {
 	@Resource(name = "loginService")
 	private LoginServiceImpl loginService;
 	
-	//로그인 확인용 맵핑입니다 추후 삭제예정!
-	//삭제 안하구 그냥 써도 될까요???ㅜㅜ
+	//사용~!
 	@GetMapping("/infobox.do")
-	public String infobox() {
-		return "infobox";
+	public ModelAndView infobox(CommandMap commandMap, HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView();
+		HttpSession session = request.getSession();
+		commandMap.put("l_id", session.getAttribute("l_id"));
+		Map<String, Object> infobox = loginService.infobox(commandMap.getMap());
+		mv.addObject("infobox", infobox);
+		mv.setViewName("infobox");
+		return mv;
 	}
 	
 
@@ -117,6 +122,7 @@ public class LoginController {
 		}
 
 		mv.addObject("myinfo", myinfo);
+		System.out.println(myinfo);
 		mv.setViewName("myinfo");
 		
 		return mv;

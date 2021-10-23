@@ -25,6 +25,10 @@ public class LoginServiceImpl implements LoginService {
 		return loginDAO.checkID(map);
 	}
 
+	public Map<String, Object> infobox(Map<String, Object> map) {
+		return loginDAO.infobox(map);
+	}
+	
 	public Map<String, Object> myinfo(Map<String, Object> map) {
 		return loginDAO.myinfo(map);
 	}

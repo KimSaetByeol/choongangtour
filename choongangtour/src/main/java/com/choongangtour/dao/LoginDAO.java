@@ -19,6 +19,10 @@ public class LoginDAO extends AbstractDAO{
 		return selectOneStr("login.checkID", map);
 	}
 
+	public Map<String, Object> infobox(Map<String, Object> map) {
+		return selectOne("login.infobox", map);
+	}
+	
 	public Map<String, Object> myinfo(Map<String, Object> map) {
 		return selectOne("login.myinfo", map);
 	}

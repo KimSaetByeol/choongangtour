@@ -101,16 +101,16 @@ function clickB(){
 	return false;
 }
 
-function noo(){
-	alert("로그인 후 이용해주세요.");
-	location.href = "login.do";
-	return false;
-}
 
 //테스트페이지 가는 함수
 function goTest() {
-	$("#main").hide();
-	$("#test").show();
+	if(${sessionScope.l_id ne null }) {
+		$("#main").hide();
+		$("#test").show();
+	} else {
+		alert("로그인 후 이용해주세요.");
+		location.href = "login.do";
+	}
 }
 
 </script>
@@ -123,16 +123,8 @@ function goTest() {
 			<p>
 				간단한 테스트를 통해<br> 나와 어울리는 여행지를 찾아볼까요?
 			</p>
-			<c:choose>
-			<c:when test="${sessionScope.l_id ne null }">
 			<input type="button" value="시작" class="btn"
 				onclick="goTest()">
-			</c:when>
-			<c:otherwise>
-			<input type="button" value="시작" class="btn"
-				onclick="return noo()">
-			</c:otherwise>
-		</c:choose>
 		</section>
 
 		<section id="test">
