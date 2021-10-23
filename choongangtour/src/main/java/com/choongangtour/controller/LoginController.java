@@ -108,17 +108,24 @@ public class LoginController {
 	
 	@PostMapping("/myinfo.do")
 	public ModelAndView myinfo(CommandMap commandMap, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		System.out.println("실패 카운트 : " + session.getAttribute("pwFailCnt"));
 		ModelAndView mv = new ModelAndView();
 		Map<String, Object> myinfo = loginService.myinfo(commandMap.getMap());
 		
 		//값이 null이면 즉, 비밀번호가 틀리면 세션에 횟수 저장, 5회 틀릴 시 로그아웃
 		if(myinfo == null) {
-			HttpSession session = request.getSession();
-			int pwFailCnt = (int) session.getAttribute("pwFailCnt");
-			session.setAttribute("pwFailCnt", pwFailCnt+1);
-			mv.setViewName("checkpw");
-			//비밀번호가 틀리면 checkpw페이지로 다시 이동
-			return mv;
+			if((int)session.getAttribute("pwFailCnt") < 5){
+				int pwFailCnt = (int) session.getAttribute("pwFailCnt");
+				session.setAttribute("pwFailCnt", pwFailCnt+1);
+				System.out.println("실패 카운트 +1 : " + session.getAttribute("pwFailCnt"));
+				mv.setViewName("checkpw");
+				//비밀번호가 틀리면 checkpw페이지로 다시 이동
+				
+				return mv;	
+			} else {
+				mv.setViewName("logout");
+			}
 		}
 
 		mv.addObject("myinfo", myinfo);
