@@ -6,6 +6,13 @@
 window.onload = function() {
 const resultName = document.querySelector(".info");
 resultName.innerHTML = resultList[${infobox.l_type}].name;
+
+function masking(email) {
+	var len = email.split('@')[0].length-3;
+	return email.replace(new RegExp('.(?=.{0,' + len + '}@)', 'g'), '*');	 
+	}
+	const eemail = document.querySelector(".email");
+	eemail.innerHTML = masking("${infobox.l_email }");
 }
 </script>
 <style type="text/css">
@@ -28,6 +35,7 @@ function goInfo() {
 	var newWindow = window.open("about:blank");
 	newWindow.location.href = './myinfo.do';
 }
+
 </script>
 <body>
 	<div class="login">
@@ -35,7 +43,7 @@ function goInfo() {
 			<c:when test="${sessionScope.l_id ne null }">
 			<a class="info"></a>, ${infobox.l_name }님 반갑습니다 <br>
 			닉네임: ${infobox.l_name } <br> 
-			email: ${infobox.l_email } <br>
+			email: <a class="email"></a> <br>
 				<button onclick="goInfo()">내 정보 수정</button>
 				<button onclick="return logout()">로그아웃</button>
 			</c:when>
