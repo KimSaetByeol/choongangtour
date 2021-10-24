@@ -56,6 +56,13 @@ public class TestServiceImplements implements TestService {
 		dao.cancelDelete(map);
 		
 	}
+	public List<Map<String, Object>> adminList(Map<String, Object> map) {
+		return dao.adminList(map);
+	}
+	public int adminTotalList(Map<String, Object> map) {
+		return dao.adminTotalList(map);
+	}
+
 
 	//////////////////////////아래로 쭉 샛별 userWrite 추가 1012
 	public void userWrite(Map<String, Object> map) {
@@ -89,5 +96,8 @@ public class TestServiceImplements implements TestService {
 	public void ubUpdate(Map<String, Object> map) {
 		dao.ubUpdate(map);
 	}
+
+
+	
 
 }

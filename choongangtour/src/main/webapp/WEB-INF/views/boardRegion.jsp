@@ -83,7 +83,9 @@ position: relative;
 		
 		</c:if>
 		
-		<hr>		<!--  줄 ---------------------------------------------------- -->
+		<c:if test="${param.b_title != null }">
+		<hr>		<!--  줄 ----------------------------------------------------  세부 관광페이지에서만 줄 보이게 해놓았습니다.--> 
+		</c:if>
 		
 		<!--  1st paragraph---------------------------------------------------- -->
 		<div id="모든 관광지들 ">
@@ -183,64 +185,69 @@ position: relative;
 		</div>
 		</c:if>
 						<!--  맨 아래에 있는 출저 -->
-						<div id="citations" style="float: right"> <!--  출저 보여주기  -->
 						
-						<c:if test="${param.re_no == 1 }"> <!--  서울이면  -->
+						<div id="citations" style="float: right"> <!--  출저 보여주기  -->
+						<c:if test="${param.re_no == 1  && param.b_title != null}"> <!--  서울이면  -->
 							출저 : <a href="https://korean.visitseoul.net/index">https://korean.visitseoul.net/index</a>
 						</c:if>
-						<c:if test="${param.re_no == 2}"> <!--  경기도-->
+						<c:if test="${param.re_no == 2  && param.b_title != null}"> <!--  경기도-->
 							출저 : <a href="https://grand.ggtour.or.kr/">https://grand.ggtour.or.kr/</a>
 						</c:if>
-						<c:if test="${param.re_no == 3}"> <!--  강원-->
+						<c:if test="${param.re_no == 3  && param.b_title != null}"> <!--  강원-->
 							출저 : <a href="https://www.gangwon.to/gwtour">https://www.gangwon.to/gwtour</a>
 						</c:if>
-						<c:if test="${param.re_no == 4}"> <!--  인천-->
+						<c:if test="${param.re_no == 4  && param.b_title != null}"> <!--  인천-->
 							출저 : <a href="https://itour.incheon.go.kr/">https://itour.incheon.go.kr/</a>
 						</c:if>
-						<c:if test="${param.re_no == 5}"> <!--  세종-->
+						<c:if test="${param.re_no == 5  && param.b_title != null}"> <!--  세종-->
 							출저 : <a href="https://www.sejong.go.kr/">https://www.sejong.go.kr/</a>
 						</c:if>
-						<c:if test="${param.re_no == 6}"> <!--  경북-->
+						<c:if test="${param.re_no == 6  && param.b_title != null}"> <!--  경북-->
 							출저 : <a href="https://tour.gb.go.kr/">https://tour.gb.go.kr/</a>
 						</c:if>
-						<c:if test="${param.re_no == 7}"> <!--  경남-->
+						<c:if test="${param.re_no == 7  && param.b_title != null}"> <!--  경남-->
 							출저 : <a href="https://tour.gyeongnam.go.kr/">https://tour.gyeongnam.go.kr/</a>
 						</c:if>
-						<c:if test="${param.re_no == 8}"> <!--  전북-->
+						<c:if test="${param.re_no == 8  && param.b_title != null}"> <!--  전북-->
 							출저 : <a href="https://tour.jb.go.kr/">https://tour.jb.go.kr/</a>
 						</c:if>
-						<c:if test="${param.re_no == 9}"> <!--  전남-->
+						<c:if test="${param.re_no == 9  && param.b_title != null}"> <!--  전남-->
 							출저 : <a href="https://www.namdokorea.com/">https://www.namdokorea.com/</a>
 						</c:if>
-						<c:if test="${param.re_no == 10}"> <!--  충북-->
+						<c:if test="${param.re_no == 10  && param.b_title != null}"> <!--  충북-->
 							출저 : <a href="https://tour.chungbuk.go.kr/www/index.do">https://tour.chungbuk.go.kr/www/index.do</a>
 						</c:if>
-						<c:if test="${param.re_no == 11}"> <!--  충남-->
+						<c:if test="${param.re_no == 11  && param.b_title != null}"> <!--  충남-->
 							출저 : <a href="https://tour.chungnam.go.kr/">https://tour.chungnam.go.kr/</a>
 						</c:if>
 						</div>
-						<c:if test="${param.re_no == 12}"> <!--  대구-->
+						<c:if test="${param.re_no == 12  && param.b_title != null}"> <!--  대구-->
 							출저 : <a href="https://tour.daegu.go.kr/">https://tour.daegu.go.kr/</a>
 						</c:if>
-						<c:if test="${param.re_no == 13}"> <!--  대전-->
+						<c:if test="${param.re_no == 13  && param.b_title != null}"> <!--  대전-->
 							출저 : <a href="https://www.daejeon.go.kr/tou/index.do">https://www.daejeon.go.kr/tou/index.do</a>
 						</c:if>
-						<c:if test="${param.re_no == 14}"> <!--  울산-->
+						<c:if test="${param.re_no == 14  && param.b_title != null}"> <!--  울산-->
 							출저 : <a href="https://tour.ulsan.go.kr/">https://tour.ulsan.go.kr/</a>
 						</c:if>
-						<c:if test="${param.re_no == 15}"> <!--  독도-->
+						<c:if test="${param.re_no == 15  && param.b_title != null}"> <!--  제주도-->
+							출저 : <a href="https://www.visitjeju.net/en">https://www.visitjeju.net/en</a>
+						</c:if>						
+						<c:if test="${param.re_no == 16  && param.b_title != null}"> <!--  독도-->
 							출저 : <a href="https://dokdo.mofa.go.kr/kor/">https://dokdo.mofa.go.kr/kor/</a>
 						</c:if>
-						<c:if test="${param.re_no == 16}"> <!--  울릉-->
+						<c:if test="${param.re_no == 17 && param.b_title != null}"> <!--  울릉-->
 							출저 : <a href="http://ulleung.go.kr/">http://ulleung.go.kr/</a>
 						</c:if>
-						<c:if test="${param.re_no == 17}"> <!--  광주-->
+						<c:if test="${param.re_no == 18 && param.b_title != null}"> <!--  광주-->
 							출저 : <a href="https://www.gjcity.go.kr/tour/contents.do?mId=0101010100">https://www.gjcity.go.kr/tour/contents.do?mId=0101010100 </a>
 						</c:if>
-						<c:if test="${param.re_no == 20 }"> <!--  부산이면 -->
+						<c:if test="${param.re_no == 20 && param.b_title != null}"> <!--  부산이면 -->
 							출저 : <a href="https://www.visitbusan.net/kr/index.do"> https://www.visitbusan.net/kr/index.do</a>
 						</c:if>
 						</div>
+						
+						
 	<br>
 						
 

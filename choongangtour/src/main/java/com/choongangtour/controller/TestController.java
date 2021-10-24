@@ -1,6 +1,7 @@
 package com.choongangtour.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -29,6 +30,7 @@ import com.choongangtour.dto.TestDTO;
 import com.choongangtour.service.TestServiceImplements;
 import com.choongangtour.util.FileSave;
 import com.choongangtour.util.Util;
+import com.choongangtour.web.log.LogDTO;
 
 import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
 
@@ -98,15 +100,57 @@ public class TestController {
 		return "touristSites";
 	}
 	@GetMapping("/adminPage")
-	public ModelAndView adminPage(HttpServletRequest req) {//아드민에서 글 다 띄우기
+	public ModelAndView adminPage(HttpServletRequest request, CommandMap map) {//아드민에서 글 다 띄우기
 		ModelAndView mv = new ModelAndView("adminPage");
-			
-		List<Map<String, Object>> list = serviceImplements.selectList();
+		String searchName = request.getParameter("searchName");
+		String search = request.getParameter("search");
+		
+		PaginationInfo paginationInfo = new PaginationInfo();
+		int pageNo = 1;
+		int listScale = 10;
+		int pageScale = 10;
+		
+		if (request.getParameter("pageNo") != null) {
+			pageNo = util.str2Int2(request.getParameter("pageNo"));
+		}
+		
+		paginationInfo.setCurrentPageNo(pageNo);
+		paginationInfo.setRecordCountPerPage(listScale);
+		paginationInfo.setPageSize(pageScale);
+
+		int startPage = paginationInfo.getFirstRecordIndex();
+		int lastPage = paginationInfo.getRecordCountPerPage();
+
+		Map<String, Object> sendMap = new HashMap<String, Object>();
+		sendMap.put("startPage", startPage);
+		sendMap.put("lastPage", lastPage);
+		
+		if(searchName != null) {
+			sendMap.put("searchName", searchName);
+			sendMap.put("search", search);
+			mv.addObject("searchName", searchName);
+			mv.addObject("search", search);
+		}
+		System.out.println("Sdas:" +sendMap);
+		List<Map<String, Object>> list = serviceImplements.adminList(sendMap);
+		int totalCount = serviceImplements.adminTotalList(sendMap);
+		paginationInfo.setTotalRecordCount(totalCount);
+		mv.addObject("paginationInfo", paginationInfo);
+		mv.addObject("pageNo", pageNo);
+		mv.addObject("totalCount", totalCount); 
+		mv.addObject("list", list);	
+
+		
+		/*
+		 * List<Map<String, Object>> list = serviceImplements.selectList();
+		 */
 		
 		
-		
-		mv.addObject("list", list);
 		return mv;
+	}
+	@GetMapping("/admin")
+	public String admin() {
+		return "admin";
 	}
 	@GetMapping("/regionMap")
 	public String regionMap(HttpServletRequest request) {

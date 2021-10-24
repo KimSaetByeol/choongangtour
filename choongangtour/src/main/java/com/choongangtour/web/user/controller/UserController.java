@@ -145,7 +145,6 @@ import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
 				mv.addObject("searchName", searchName);
 				mv.addObject("search", search);
 			}
-			
 			List<LogDTO> list = logService.logList(sendMap);
 			int totalCount = logService.logTotalList(sendMap);
 			paginationInfo.setTotalRecordCount(totalCount);

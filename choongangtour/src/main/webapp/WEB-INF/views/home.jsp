@@ -25,9 +25,9 @@ body{
 <P>  The time on the server is ${serverTime}. </P>
 
 
-<a href="./boardRegion.do?re_no=20">busan</a> <br>
-<a href="./adminPage.do">admin</a> <br>
+<a href="./admin.do">관리자</a> <br>
 <a href="./touristSites.do">tour</a> <br>
+
 <a href="./userBoard.do">userBoard</a> <br>
 <a href="./infobox.do">로그인박스(임시)</a> <br>
 <a href="./travelTest.do">여행테스트</a> <br>

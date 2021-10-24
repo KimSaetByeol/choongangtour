@@ -3,6 +3,7 @@ package com.choongangtour.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.choongangtour.common.CommandMap;
@@ -10,12 +11,11 @@ import com.choongangtour.dto.TestDTO;
 
 @Repository("testDAO")
 public class testDAO extends AbstractDAO {
+	private SqlSession sql;
 	public List<Map<String, Object>> selectList(TestDTO dto) {
 		return (List<Map<String, Object>>) selectList("test.board", dto);
 	}
-	public List<Map<String, Object>> selectList() {
-		return selectList("test.adminBoard");
-	}
+
 	public List<Map<String, Object>> selectList(int b_no) {
 		return selectList("test.adminModify",b_no);
 		
@@ -45,6 +45,15 @@ public class testDAO extends AbstractDAO {
 	public void cancelDelete(Map<String, Object> map) {
 		update("test.adminCancelDelete", map);
 		
+	}
+	public List<Map<String, Object>> adminList(Map<String, Object> map) {
+		return selectList("test.adminBoard", map);
+	}
+	public int adminTotalList(Map<String, Object> map) {
+		return selectOneint("test.adminTotalList", map);
+	}
+	public List<Map<String, Object>> selectList() {
+		return selectList("test.adminBoard");
 	}
 
 
@@ -87,5 +96,8 @@ public class testDAO extends AbstractDAO {
 	public void ubUpdate(Map<String, Object> map) {
 		update("test.ubUpdate", map);
 	}
+
+	
+
 
 }

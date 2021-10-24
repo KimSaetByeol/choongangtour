@@ -3,7 +3,24 @@
 
 <mapper namespace="test">
 <select id="adminBoard"  resultType="HashMap"><!--  admin 에서 보여주는 게시판형 리스트 -->
-	select * from boardRegionview
+	select * from boardRegionview 
+	<if test="searchName =='b_title'">
+		WHERE b_title LIKE CONCAT('%',#{search},'%') 
+	</if>
+	<if test="searchName =='re_category'">
+		WHERE re_category LIKE CONCAT('%',#{search},'%') 
+	</if>
+	ORDER BY b_no asc LIMIT #{startPage}, #{lastPage}
+	</select>
+<select id="adminTotalList"  resultType="Integer"><!--  admin 에서 보여주는 게시판형 리스트 -->
+	select count(*) from boardRegionview 
+	<if test="searchName =='b_title'">
+		WHERE b_title LIKE CONCAT('%',#{search},'%') 
+	</if>
+	<if test="searchName =='re_category'">
+		WHERE re_category LIKE CONCAT('%',#{search},'%') 
+	</if>
+	
 	</select>
 	
 	<select id="adminModify" resultType="HashMap" parameterType="Integer"><!--  수정하기 페이지 보여주는 페이지 리스트 -->
