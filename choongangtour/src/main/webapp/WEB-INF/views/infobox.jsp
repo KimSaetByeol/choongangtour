@@ -4,16 +4,22 @@
 <script type="text/javascript" src="./resources/js/typeList.js"></script>
 <script type="text/javascript">
 window.onload = function() {
-const resultName = document.querySelector(".info");
-resultName.innerHTML = resultList[${infobox.l_type}].name;
-
-function masking(email) {
+function masking(email) {	
 	var len = email.split('@')[0].length-3;
 	return email.replace(new RegExp('.(?=.{0,' + len + '}@)', 'g'), '*');	 
 	}
 	const eemail = document.querySelector(".email");
 	eemail.innerHTML = masking("${infobox.l_email }");
+
+//	if(${infobox.l_type ne null}) {
+//		const resultName = document.querySelector(".info");
+//		resultName.innerHTML = (resultList[${infobox.l_type}].name + ", ");
+//		return resultName;
+//		}
 }
+</script>
+<script type="text/javascript">
+
 </script>
 <style type="text/css">
 .login {
@@ -41,7 +47,7 @@ function goInfo() {
 	<div class="login">
 		<c:choose>
 			<c:when test="${sessionScope.l_id ne null }">
-			<a class="info"></a>, ${infobox.l_name }님 반갑습니다 <br>
+			<a class="info"></a>${infobox.l_name }님 반갑습니다 <br>
 			닉네임: ${infobox.l_name } <br> 
 			email: <a class="email"></a> <br>
 				<button onclick="goInfo()">내 정보 수정</button>
