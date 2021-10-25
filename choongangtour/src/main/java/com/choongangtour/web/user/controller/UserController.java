@@ -8,11 +8,8 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.slf4j.Logger; 
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller; 
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping; 
  import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -20,15 +17,14 @@ import org.springframework.web.servlet.ModelAndView;
 import com.choongangtour.util.Util;
 import com.choongangtour.web.log.LogDTO;
 import com.choongangtour.web.log.LogService;
-import com.choongangtour.web.user.model.UserVO;
-import com.choongangtour.web.user.service.UserService;
+import com.choongangtour.web.user.UserDTO;
+import com.choongangtour.web.user.UserService;
 
 import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo; 
  
  @Controller 
  @RequestMapping(value = "/user") 
  public class UserController { 
-	 private static final Logger logger = LoggerFactory.getLogger(UserController.class); 
 	 
 	 @Autowired
 	 private Util util;
@@ -38,12 +34,13 @@ import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
 	 
 	 @Inject 
 	 private UserService userService; 
-	
-	 @RequestMapping(value = "/getUserList.do", method = RequestMethod.GET) 
-	 public String getUserList(Model model, HttpServletRequest request) throws Exception{ 
-		 
+	 
+	 @RequestMapping(value = "/userList.do", method = RequestMethod.GET) 
+	 public ModelAndView getUserList(HttpServletRequest request) throws Exception {
+			ModelAndView mv = new ModelAndView("user/userList");
+			
 			String ip = util.getUserIp(request);
-			String target = "getuserList.do"; 
+			String target = "userList.do"; 
 			String data = "유저리스트";
 			 
 			LogDTO log = null;
@@ -57,18 +54,6 @@ import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
 			}
 			
 			logService.writeLog(log);
-		 
-			logger.info("getUserList()...."); 
-		 
-			model.addAttribute("userList", userService.getUserList());
-		 
-			return "user/userList";
-		 
-	 } 
-	 
-	 @RequestMapping(value = "/getUserList.do", method = RequestMethod.POST) 
-	 public ModelAndView getUserList(HttpServletRequest request) throws Exception {
-			ModelAndView mv = new ModelAndView("user/getUserList");
 			
 			String searchName = request.getParameter("searchName");
 			String search = request.getParameter("search");
@@ -100,8 +85,8 @@ import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
 				mv.addObject("search", search);
 			}
 			
-			List<UserVO> list = userService.getUserList();
-			int totalCount = userService.userTotalList();
+			List<UserDTO> list = userService.userList(sendMap);
+			int totalCount = userService.userTotalList(sendMap);
 			paginationInfo.setTotalRecordCount(totalCount);
 			mv.addObject("paginationInfo", paginationInfo);
 			mv.addObject("pageNo", pageNo);
@@ -145,6 +130,7 @@ import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
 				mv.addObject("searchName", searchName);
 				mv.addObject("search", search);
 			}
+			
 			List<LogDTO> list = logService.logList(sendMap);
 			int totalCount = logService.logTotalList(sendMap);
 			paginationInfo.setTotalRecordCount(totalCount);
