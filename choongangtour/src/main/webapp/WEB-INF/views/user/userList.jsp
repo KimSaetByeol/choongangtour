@@ -1,139 +1,95 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>유저리스트</title>
+<link href="./css/index.css" rel="stylesheet">
+<style type="text/css">
+table {
+	margin: 0 auto;
+	width: 100%;
+	height: 500px;
+	border-collapse: collapse;
+}
 
-<script> 
-	$(document).on('click', '#btnSearch', function(e){ 
-		e.preventDefault(); 
-		var url = "${getBoardListURL}"; 
-		url = url + "?searchType=" + $('#searchType').val(); 
-		url = url + "&keyword=" + $('#keyword').val(); 
-		console.log(url); 
-		location.href = url; 
-	});
-	
-	function fn_prev(page, range, rangeSize, searchType, keyword) { 
-		
-		var page = ((range - 2) * rangeSize) + 1; 
-		var range = range - 1; 
-		
-		var url = "${globalCtx}/user/getUserList.do"; 
-		url = url + "?page=" + page; 
-		url = url + "&range=" + range; 
-		url = url + "&searchType=" + searchType; 
-		url = url + "&keyword=" + keyword; 
-		
-		location.href = url; 
-		
-	} 
-	
-	function fn_pagination(page, range, rangeSize, searchType, keyword) { 
-		
-		var url = "${getUserListURL}"; 
-		url = url + "?page=" + page; 
-		url = url + "&range=" + range; 
-		url = url + "&searchType=" + searchType; 
-		url = url + "&keyword=" + keyword; 
-		console.log(url); 
-		location.href = url; 
-		
-	} 
-	
-	function fn_next(page, range, rangeSize, searchType, keyword) { 
-		
-		var page = parseInt((range * rangeSize)) + 1; 
-		var range = parseInt(range) + 1; 
-		var url = "${globalCtx}/user/getUserList.do"; 
-		url = url + "?page=" + page; 
-		url = url + "&range=" + range; 
-		url = url + "&searchType=" + searchType; 
-		url = url + "&keyword=" + keyword; 
-		location.href = url; 
-		
-	} 
-	
+th {
+	background-color: gray;
+}
+
+tr {
+	border-bottom: 1px gray solid;
+}
+td{
+	text-align: center;
+}
+#title{
+text-align: left;
+}
+#paging{text-align:center;margin:10px auto;}
+#paging img{vertical-align: middle;}
+#paging a{display:inline-block; padding:0 3px;}
+#paging a:hover{background-color:#EAFAF1;border-color:#eee;box-shadow:3px 3px 3px #7DCEA0;}
+</style>
+<script type="text/javascript">
+function linkPage(pageNo){
+	location.href="./userList.do?pageNo="+pageNo+"<c:if test="${search ne null}">&searchName=${searchName}&search=${search}</c:if>";
+}
 </script>
+</head>
+<body>
 	
-<article>
-	<div class="container"> 
-			<h2>User list</h2> 
-			<div class="table-responsive"> 
-				<table class="table table-striped table-sm"> 
-					<colgroup> 
-						<col style="width:auto;" /> 
-						<col style="width:25%;" /> 
-						<col style="width:25%;" /> 
-						<col style="width:15%;" /> 
-						<col style="width:15%;" /> 
-						<col style="width:15%;" /> 
-					</colgroup> 
-					<thead> 
-						<tr> 
-							<th>USER ID</th> 
-							<th>USER NAME</th> 
-							<th>EMAIL</th> 
-							<th>GRADE</th> 
-							<th>가입일</th> 
-						</tr>
-					</thead>
-					<tbody>
-						<c:choose>
-						<c:when test="${empty userList }" > 
-							<tr><td colspan="5" align="center">데이터가 없습니다.</td></tr> 
-						</c:when> 
-						<c:when test="${!empty userList}"> 
-						<c:forEach var="list" items="${userList}"> 
-						<tr> 
-							<td><c:out value="${list.l_id}"/></td> 
-							<td><c:out value="${list.l_name}"/></td> 
-							<td><c:out value="${list.l_email}"/></td> 
-							<td><c:out value="${list.l_grade}"/></td> 
-							<td><c:out value="${list.l_joindate}"/></td>
-						</tr> 
-						</c:forEach> 
-						</c:when>
-						</c:choose>
-					</tbody>
-				
-				</table>
-			</div> 
-					
-			<!-- pagination{s} --> 
-	<div id="paginationBox"> 
-		<ul class="pagination"> 
-			<c:if test="${pagination.prev}"> 
-				<li class="page-item"><a class="page-link" href="#" 
-				onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}', '${pagination.searchType}', '${pagination.keyword}')">Previous</a></li> 
-			</c:if> 
-			
-			<c:forEach begin="${pagination.startPage}" end="${pagination.endPage}" var="idx"> 
-				<li class="page-item <c:out value="${pagination.page == idx ? 'active' : ''}"/> ">
-				<a class="page-link" href="#" onClick="fn_pagination('${idx}', '${pagination.range}', '${pagination.rangeSize}', '${pagination.searchType}', '${pagination.keyword}' )"> ${idx} </a></li> 
-			</c:forEach> 
-			
-			<c:if test="${pagination.next}"> 
-				<li class="page-item"><a class="page-link" href="#" onClick="fn_next('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}', '${pagination.searchType}', '${pagination.keyword}')">Next</a></li> 
-			</c:if>
-		</ul>
-	</div> 
-	<!-- pagination{e} --> 
+	<h1>유저리스트 </h1>
 	
-	<!-- search{s} --> 
-			<div class="form-group row justify-content-center"> 
-				<div style="padding-right:10px"> 
-					<select class="form-control form-control-sm" name="searchType" id="searchType"> 
-						<option value="title" <c:if test="${pagination.searchType eq 'title'}">selected</c:if> >제목</option> 
-						<option value="content" <c:if test="${pagination.searchType eq 'content'}">selected</c:if>>본문</option> 
-						<option value="reg_id" <c:if test="${pagination.searchType eq 'reg_id'}">selected</c:if>>작성자</option> 
-					</select> 
-				</div>
-			<div style="padding-right:10px">
-				<input type="text" class="form-control form-control-sm" name="keyword" id="keyword" value="${pagination.keyword}">
+	<h2>
+	<c:if test="${searchName ne null }">
+		${searchName } / ${search }
+		<button onclick="location.href='./userList.do'">검색초기화</button>
+	</c:if>
+	</h2>
+	
+	<c:choose>
+		<c:when test="${fn:length(list) gt 0 }">
+			<table>
+				<tr>
+					<th>아이디</th>
+					<th>이름</th>
+					<th>이메일</th>
+					<th>등급</th>
+					<th>이메일</th>
+				</tr>
+				<c:forEach items="${list }" var="list">
+				<tr>
+					<td>${list.l_id }</td>
+					<td>${list.l_name }</td>
+					<td>${list.l_email }</td>
+					<td>${list.l_grade }</td>
+					<td>${list.l_email }</td>
+				</tr>
+				</c:forEach>
+			</table>
+			<!-- 페이징은 여기에 -->
+			<div id="paging">
+				<ui:pagination paginationInfo="${paginationInfo}" type="text" jsFunction="linkPage"/>
+				<form action="./userList.do" method="get">
+					<select name="searchName">
+						<option value="id" <c:if test="${searchName eq 'id' }">selected="selected</c:if>>아이디</option>
+						<option value="name" <c:if test="${searchName eq 'name' }">selected="selected</c:if>>이름</option>
+						<option value="email" <c:if test="${searchName eq 'email' }">selected="selected</c:if>>이메일</option>
+						<option value="grade" <c:if test="${searchName eq 'grade' }">selected="selected</c:if>>등급</option>
+						<option value="joindate" <c:if test="${searchName eq 'joindate' }">selected="selected</c:if>>날짜</option>
+					</select>
+					<input type="text" name="search" value="${search }">
+					<button>검색</button>
+				</form>
 			</div>
-			<div>
-				<button class="btn btn-sm btn-primary" name="btnSearch" id="btnSearch">검색</button> 
-			</div> 
-		</div> 
-	<!-- search{e} --> 
-			
-		</div> 
-</article>	
+		</c:when>
+		<c:otherwise>
+			<h2>출력할 글이 없습니다.</h2>
+		</c:otherwise>
+	</c:choose>
+</body>
+</html>
