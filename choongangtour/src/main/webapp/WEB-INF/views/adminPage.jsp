@@ -96,12 +96,12 @@ text-align: left;
 
 				</tr>
 				<c:forEach items="${list }" var="l">
-					<tr>
+					<tr onclick="location.href='./adminDetail.do?b_no=${l.b_no}'">
 						<td>${l.b_no }</td>
 						<td>${l.re_category }</td>
 						<td>${l.b_title }</td>
 						<td>${l.re_no}</td>
-						<td title="${l.b_content }"><c:set var='content'
+						<td title="${l.b_content }" ><c:set var='content'
 								value="${l.b_content }" /> <c:set var='shortenContent'
 								value="${fn:substring(content, 0, 20)}" /> <c:choose>
 								<c:when test="${fn:length(shortenContent) gt 0}">

@@ -1,6 +1,7 @@
 package com.choongangtour.controller;
 
 import java.io.IOException;
+import java.lang.annotation.Target;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -197,7 +198,13 @@ public class TestController {
 		serviceImplements.adminCancelDelete(map);
 		return "redirect: adminPage.do";//"redirect: adminPage.do"
 	}
-	
+	@GetMapping("/adminDetail.do")
+	public ModelAndView adminDetail(@RequestParam("b_no") int b_no ) {
+		ModelAndView mv = new ModelAndView("adminDetail");
+		List<Map<String, Object>> list = serviceImplements.selectList(b_no);//수정하기 화면 보여주는 adminModify 재활용
+		mv.addObject("list", list);	
+		return mv;
+	}
 	
 	//////////////////////////아래로 쭉 샛별 userWrite 추가
 	
