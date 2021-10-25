@@ -26,8 +26,7 @@
 </head>
 <body>
 	
-	<div id="infobox"><c:import url="infobox.jsp"/></div>
-
+	<div id="infobox"><c:import url="/infobox.do"/></div>
 	<!-- 샛별추가 1020 -->
 	<c:if test="${sessionScope.l_id ne null}">
 		<a href="./userWrite.do">글쓰기</a>
