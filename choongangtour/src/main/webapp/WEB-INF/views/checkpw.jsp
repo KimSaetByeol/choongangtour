@@ -24,6 +24,9 @@ function chk(cnt){
 </script>
 </head>
 <body>
+
+
+
 <div id="infobox">
 	<!-- pwFailCnt(=비밀번호 틀린 횟수)가 5보다 크면 로그아웃 -->
 	<c:if test="${sessionScope.pwFailCnt ne 0 }">

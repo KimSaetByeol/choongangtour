@@ -14,8 +14,8 @@
 	
 	function regional_map_on(local)
 	{
-		document.getElementById('regional_map').src = 'resources/images/guide_map_main.png'
-		document.getElementById('regional_map1').src = 'resources/images/guide_map_' + local + '.png'
+		document.getElementById('regional_map').src = 'resources/img/guide_map_main.png'
+		document.getElementById('regional_map1').src = 'resources/img/guide_map_' + local + '.png'
 		loc = local;
 		
 		return loc;
@@ -24,7 +24,7 @@
 	function regional_map()
 	{
 		document.getElementById("regional_map1").src = ''
-		document.getElementById("regional_map").src = "resources/images/guide_map_main.png";
+		document.getElementById("regional_map").src = "resources/img/guide_map_main.png";
 	}
 	</script>
 
@@ -36,7 +36,7 @@
 	
 	<a style="float: left;">
 	<img src="" usemap="#mainmap1" id="regional_map1" >
-	<img src="resources/images/guide_map_main.png" usemap="#mainmap" id="regional_map" align="left">
+	<img src="resources/img/guide_map_main.png" usemap="#mainmap" id="regional_map" align="left">
 	   </a>
 	
 		<map name="mainmap">

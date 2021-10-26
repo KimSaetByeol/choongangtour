@@ -25,7 +25,7 @@ function masking(email) {
 .login {
 	width: 60%;
 	height: auto;
-	background-color: pink;
+	background-color: #CCCCCC;
 	border-radius: 10px;
 	vertical-align: middle;
 }
