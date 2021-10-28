@@ -5,22 +5,16 @@
 <html>
 <head>
 <title>boardRegion</title>
-<style type="text/css">
 
+    <link rel="stylesheet" href="resources/css/style.css">
+<style type="text/css">
+	
 
 #menu {
 	font-size: 15pt;
 	height: 100px;
 	text-align: center;
 	line-height: 100px;
-}
-
-body {
-	width: 100%;
-	height: 1200px;
-	border: solid black 2px;
-	font-family: Malgun gothic;
-	color: #191919;
 }
 
 #main {
@@ -42,6 +36,8 @@ body {
 	position: relative;
 	font-size: 15pt;
 }
+
+
 
 </style>
 
@@ -111,7 +107,7 @@ body {
 			<h2>${param.b_title }</h2>
 			
 				<!--  카카오 맵 aPI -->
-		<div id="map" >
+		<div id="map" style="width:100%; height:680px; ">
 	
 		
 		    <span id="maplevel"></span>
