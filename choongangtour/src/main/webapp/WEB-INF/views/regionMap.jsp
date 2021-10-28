@@ -43,11 +43,12 @@
 
 </head>
 <body>
+<div style="background-image: url(resources/img/4607190.jpg);">
 
 <div id ="UI" align="center">
   <div style="padding-bottom:10px; height:5px;"></div>
 
-<div id ="menubar" height="50px" style ="border-radius: 10px; box-shadow: 1px 1px 1px 1px #C9C9C9; border-style: outset; padding: 10px;    display:flex; flex-direction: row ; justify-content: space-around; width:1500px; padding-top:10px;">
+<div id ="menubar" height="50px" style ="background-color:white; border-radius: 10px; box-shadow: 1px 1px 1px 1px #C9C9C9; border-style: outset; padding: 10px;    display:flex; flex-direction: row ; justify-content: space-around; width:1500px; padding-top:10px;">
 
   <div style="margin-left: 0;" ><a href="./"><img src="resources/img/logo.png" height="50px" style=""></a></div>
 
@@ -89,7 +90,7 @@
   <div style="width:20px;"></div>
 
 
-  <div id ="article" style="display:flex; flex-direction: column; justify-content: flex-start; box-shadow: 1px 1px 1px 1px #C9C9C9; border-style: outset; border-radius: 10px; padding: 5px;  border-radius: 10px; padding-top: 10px;   width: 1150px; ">
+  <div id ="article" style="background-color:white; display:flex; flex-direction: column; justify-content: flex-start; box-shadow: 1px 1px 1px 1px #C9C9C9; border-style: outset; border-radius: 10px; padding: 5px;  border-radius: 10px; padding-top: 10px;   width: 1150px; ">
 	
 
 
@@ -600,6 +601,7 @@ function setOverlayMapTypeId(maptype) {
 <a href="./admin.do">관리자</a> <br>
 </div>
 
+</div>
 </div>
 </body>
 </html>
