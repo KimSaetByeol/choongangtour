@@ -23,7 +23,6 @@ import com.choongangtour.web.user.UserService;
 import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo; 
  
  @Controller 
- @RequestMapping(value = "/user") 
  public class UserController { 
 	 
 	 @Autowired
