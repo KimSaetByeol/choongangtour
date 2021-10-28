@@ -65,7 +65,8 @@ td {
 </script>
 </head>
 <body>
-	<c:import url="./sidebar.jsp" />
+
+<c:import url="./banner.jsp"/>
 	<div id="middle" align="center"
 		style="padding-top: 20px; padding-bottom: 30px; display: flex; flex-direction: row; justify-content: space-evenly;">
 		<div style="width: 20px;"></div>
