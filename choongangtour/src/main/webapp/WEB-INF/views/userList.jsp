@@ -58,16 +58,16 @@ function linkPage(pageNo){
 					<th>번호</th>
 					<th>아이디</th>
 					<th>이름</th>
-					<th>등급</th>
 					<th>이메일</th>
+					<th>등급</th>
 				</tr>
 				<c:forEach items="${list }" var="list">
 				<tr>
 					<td>${list.l_no }</td>
 					<td>${list.l_id }</td>
 					<td>${list.l_name }</td>
-					<td>${list.l_grade }</td>
 					<td>${list.l_email }</td>
+					<td>${list.l_grade }</td>
 				</tr>
 				</c:forEach>
 			</table>
