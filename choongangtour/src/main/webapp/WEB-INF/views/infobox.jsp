@@ -76,6 +76,12 @@ function goInfo() {
 			</c:otherwise>
 		</c:choose>
 		<br> <a href="./home.do">홈으로</a>
+		<c:if test="${sessionScope.l_id eq 'admin' }">
+		<a href="./admin.do">관리자</a> 
+		
+		</c:if>
+
+		
 	</div>
 	<!-- end of login -->
 </body>

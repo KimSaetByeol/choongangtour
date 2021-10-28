@@ -181,7 +181,6 @@
 <div style="width:1500px; padding-top: 20px;  box-shadow: 1px 1px 1px 1px #D5E4F7; border-style: outset; border-radius: 10px;">
 &nbsp;<h1>Choong-Ang Tour</h1>
 <img src="resources/img/logo.png" height="80px"><br>
-<a href="./admin.do">관리자</a> <br>
 </div>
 
 </div>

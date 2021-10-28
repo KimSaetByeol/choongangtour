@@ -100,7 +100,7 @@ th{
 
 
 
-<div id ="middle"  align="center"   style=" padding-top: 20px; padding-bottom: 30px; display:flex; flex-direction: row; justify-content: space-evenly;">
+<div id ="middle"  align=""   style=" padding-top: 20px; padding-bottom: 30px; display:flex; flex-direction: row; justify-content: space-evenly;">
   <div style="width:20px;"></div>
 
 
@@ -160,9 +160,9 @@ th{
 
 <div id="aside"  style="padding-right: 30px; padding-left: 10px; display:flex; flex-direction: column;width:350px; border-radius: 10px; ">
 <div style=" border-radius: 10px; box-shadow: 1px 1px 1px 1px #C9C9C9;border-style: outset; padding: 10px; ">
-
+<div align="center">
   <c:import url="/infobox.do"></c:import>
-  
+  </div>
   
   </div>
   <div id='calendar'align="center">
