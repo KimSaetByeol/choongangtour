@@ -63,7 +63,7 @@
 	
 <h2>관리자 페이지</h2>
 <button onclick="location.href='./adminPage.do'">관리자 관광 글 목록</button>
-<button onclick="location.href='./user/logList.do'">로그 목록</button>
+<button onclick="location.href='./logList.do'">로그 목록</button>
 <button onclick="location.href='./write.do'">관리자 관광 정보 글 쓰기</button>
 </div>
 
