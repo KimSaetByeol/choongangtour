@@ -100,7 +100,12 @@ div[data-title]:hover:after {
 
 #dropdown1:hover #dropdown-content{display: block;}
 
-
+#imgshowninBR{
+	width: 800px;
+}
+#contextText{
+	width: 800px;
+}
 </style>
 
 </head>
@@ -168,26 +173,26 @@ div[data-title]:hover:after {
 		<hr>		<!--  줄 ----------------------------------------------------  세부 관광페이지에서만 줄 보이게 해놓았습니다.--> 
 		</c:if>
 		
-		각 랜드마크를 클릭하면 랜드마크 설명으로 넘어갑니다.
 		<!--  1st paragraph---------------------------------------------------- -->
 		<div id="모든 관광지들 "  align="center">
 			 <c:if test="${fn:length(list) == 0 }"> <!--  상세정보값 없으면 이거 띄우기  (상세정보 페이지에 이거 안 보이게 할려고)-->
 				<h1 style="font-size: xxx-large; font-weight: bold;">${list2[0].re_category }</h1> <!-- 각 행정구역  re_category-->
-			<div id="list2,rightBeforeDetailSeparatedBySites 부산 황령산 / 서울 남산타워" style="border: 2px solid black">
+			<hr>
+			<div id="list2,rightBeforeDetailSeparatedBySites 부산 황령산 / 서울 남산타워" >
 			<!--  select * from boardRegionview2 where re_no= #re_no and visi =#visi  order by b_no 지역에 있는 관광지(3번지) (6번지) (7번지로 지정했음) 들을 찾아라 -->
 			<!--  각 지역(region)에는 보여주는 게시물이 4(단락)/3/4  총(10~12) 게시물(단락)으로  구성되어 있고, 이것에 따라 n번지의 이미지를 미리보기 할 수 있음  -->
-				<h2>${list2[3].b_title} </h2> <img alt="" src="${list2[3].b_url }" width="800px"  onclick="location.href='boardRegion.do?re_no=${list2[0].re_no}&b_title=${list2[0].b_title}'"> <!-- region에 있는 0번지의 이미지-->
-			</div><br>
+				<h2>${list2[3].b_title} </h2> <img id= "imgShownInBR"alt="" src="${list2[3].b_url }" width="800px"  onclick="location.href='boardRegion.do?re_no=${list2[0].re_no}&b_title=${list2[0].b_title}'"> <!-- region에 있는 0번지의 이미지-->
+			</div><br><hr>
 			
 			<c:if test="${list2[6].b_title != null}"><!-- 만약 관광지가 있다면 -->
-			<div id="list2,rightBeforeDetailSeparatedBySites 부산 호천마을/ " style="border: 2px solid black">
-				<h2>${list2[6].b_title} </h2> <img alt="" src="${list2[6].b_url }" width="800px;"  onclick="location.href='boardRegion.do?re_no=${list2[6].re_no}&b_title=${list2[6].b_title}'"> <!-- region에 있는 6번지의 이미지-->
-			</div><br>
+			<div id="list2,rightBeforeDetailSeparatedBySites 부산 호천마을/ " >
+				<h2>${list2[6].b_title} </h2> <img id= "imgShownInBR" alt="" src="${list2[6].b_url }" width="800px;"  onclick="location.href='boardRegion.do?re_no=${list2[6].re_no}&b_title=${list2[6].b_title}'"> <!-- region에 있는 6번지의 이미지-->
+			</div><br><hr>
 			
 			</c:if>
 			<c:if test="${list2[7].b_title != null}"> <!-- 만약 관광지가 있다면 -->
-			<div id="list2,rightBeforeDetailSeparatedBySites 부산 해운대 / " style="border: 2px solid black">
-				<h2>${list2[7].b_title}<!--  해운대 -->  </h2> <img alt="" src="${list2[7].b_url}"  height="600px" onclick="location.href='boardRegion.do?re_no=${list2[7].re_no}&b_title=${list2[7].b_title}'">  <!-- region에 있는 7번지의 이미지-->
+			<div id="list2,rightBeforeDetailSeparatedBySites 부산 해운대 / " >
+				<h2>${list2[7].b_title}<!--  해운대 -->  </h2> <img id= "imgShownInBR" alt="" src="${list2[7].b_url}"  width="800px;"  onclick="location.href='boardRegion.do?re_no=${list2[7].re_no}&b_title=${list2[7].b_title}'">  <!-- region에 있는 7번지의 이미지-->
 			</div><br>
 			</c:if>
 			
@@ -199,9 +204,11 @@ div[data-title]:hover:after {
 		<div id="DetailedInfoOnTheSelected"  ><!--  상세정보 -->
 		<c:forEach items="${list }" var="l" varStatus="status" >
 		 <c:if test="${status.count == 1}"><!-- 있다면 그냥 foreach문 무시하고 하나로 보이게  -->
-		            <option value="${l.re_category }"  style="font-size: xxx-large; font-weight: bold;">${l.re_category}</option> <br>
+		            <option value="${l.re_category }"  style="font-size: xxx-large; font-weight: bold;">${l.re_category}</option>
 		            <option value="${l.b_title }" style="font-size: x-large; font-weight: bold;">${l.b_title }</option>
 		            <option value="${l.b_date }"  >업로드 날짜 : <fmt:formatDate value="${l.b_date }" pattern="yyyy-MM-dd HH:mm"/></option>
+		            
+		            <hr>
 		        </c:if>
 
 		</c:forEach>
@@ -209,7 +216,7 @@ div[data-title]:hover:after {
 		<c:forEach items="${list }" var="l">
 		<c:choose>
 			<c:when test="${l.b_url != null}"> <br>  <!--  이미지 있으면 보여주고  -->
-				<img alt="img" src="${l.b_url }">
+				<img id= "imgShownInBR" alt="img" src="${l.b_url }">
 				
 			</c:when>
 		
@@ -223,13 +230,14 @@ div[data-title]:hover:after {
 			<div id="content">
 				<table>
 					<tr>
-						<td id="contextText"><br>${l.b_content}<br></td>
+						<td id="contextText" ><br>${l.b_content}<br></td>
 						
 					</tr>
 				</table>
 			</div>
 		</c:forEach>
 		<c:if test="${param.b_title != null }">
+		<br>
 			<div id= box>
 <table> 
 				<tr valign="top"> <!--  이것또한 상단 이미지 미리보기와 같게 region의 첫번쨰 게시물에 있는 정보만 보여주게 한다.  -->
