@@ -424,8 +424,11 @@ public class TestController {
 		map.put("lastPage", lastPage);
 		
 		List<Map<String, Object>> ublist = serviceImplements.userBoard(map.getMap());
+		List<Map<String, Object>> hotList = serviceImplements.hotList(map.getMap());		
+		System.out.println("hotList OK");
 		
 		mv.addObject("list", ublist);
+		mv.addObject("hotList", hotList);
 		mv.addObject("paginationInfo", paginationInfo);
 		mv.addObject("pageNo", pageNo);
 		mv.addObject("totalCount", totalCount);

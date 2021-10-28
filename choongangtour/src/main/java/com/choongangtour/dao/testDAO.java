@@ -97,6 +97,10 @@ public class testDAO extends AbstractDAO {
 		update("test.ubUpdate", map);
 	}
 
+	public List<Map<String, Object>> hotList(Map<String, Object> map) {
+		return (List<Map<String, Object>>) selectList("test.hotList", map);
+	}
+
 	
 
 	

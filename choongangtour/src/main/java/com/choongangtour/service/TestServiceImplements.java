@@ -97,6 +97,10 @@ public class TestServiceImplements implements TestService {
 		dao.ubUpdate(map);
 	}
 
+	public List<Map<String, Object>> hotList(Map<String, Object> map) {
+		return dao.hotList(map);
+	}
+
 
 
 

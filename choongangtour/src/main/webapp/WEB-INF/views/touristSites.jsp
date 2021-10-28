@@ -26,10 +26,6 @@
 	<h3><a href='./boardRegion.do?re_no=17'>울릉도</a></h3>
 	<h3><a href='./boardRegion.do?re_no=18'>광주</a></h3>
 	<h3><a href='./boardRegion.do?re_no=19'>북한</a></h3>
-	
 	<h3><a href='./boardRegion.do?re_no=20'>부산</a></h3>
-
-
-	
 </body>
 </html>

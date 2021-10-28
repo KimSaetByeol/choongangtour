@@ -68,7 +68,7 @@ function link12(){
 }
 </script>
 <script type="text/javascript">
-function link13()){
+function link13(){
 	window.parent.location.href= "./boardRegion.do?re_no=13";
 }
 </script>
@@ -688,13 +688,6 @@ function Bleave(){
 				<img src="./resources/img/busanMT1 황령산.jfif" height="200px">
 				<img src="./resources/img/busanvil1  부산 호천마을.jfif" height="200px">
 				</div>
-				
-				
-				
-				
-				
-				
-				
 			</div>
 		</div>
  </body>

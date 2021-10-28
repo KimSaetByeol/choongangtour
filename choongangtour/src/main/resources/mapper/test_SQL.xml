@@ -131,6 +131,14 @@
 		WHERE b_no=#{b_no};
 	</update>
 
+	<select id="hotList" parameterType="HashMap"
+		resultType="HashMap">
+		SELECT b_no, LENGTH(b_title),
+		IF(LENGTH(b_title) > 45,
+		CONCAT(SUBSTRING(b_title , 1, 20), '...'),
+		b_title)
+		AS b_title, b_like, b_date FROM ubrview ORDER BY b_like DESC LIMIT 0, 5
+	</select>
 
 </mapper>
     

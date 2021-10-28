@@ -22,12 +22,20 @@ function masking(email) {
 
 </script>
 <style type="text/css">
+a, a:link{ 
+	text-decoration:none;
+	color: dimgray;
+}
+a:hover{
+	color: black;
+	text-decoration: underline;
+}
 .login {
-	width: 60%;
 	height: auto;
-	background-color: #CCCCCC;
 	border-radius: 10px;
 	vertical-align: middle;
+	margin: 0 auto;
+	padding: 10px;
 }
 </style>
 <script type="text/javascript">
@@ -44,13 +52,19 @@ function goInfo() {
 
 </script>
 <body>
-	<div class="login">
+	<div class="login" style="padding: 20px;">
 		<c:choose>
 			<c:when test="${sessionScope.l_id ne null }">
-			<a class="info"></a>${infobox.l_name }님 반갑습니다 <br>
-			닉네임: ${infobox.l_name } <br> 
+			<a class="info"></a>${infobox.l_name }님 반갑습니다 
+			<br>
+			닉네임: ${infobox.l_name }
+				<!-- 관리자 -->
+				<c:if test="${infobox.l_grade eq 9}">
+					(<a href="./admin.do">관리자</a>)
+				</c:if>
+			<br> 
 			email: <a class="email"></a> <br>
-				<button onclick="goInfo()">내 정보 수정</button>
+				<button onclick="goInfo()" style="margin-top: 10px;">내 정보 수정</button>
 				<button onclick="return logout()">로그아웃</button>
 			</c:when>
 
@@ -64,24 +78,28 @@ function goInfo() {
 				<c:if test="${code eq 'changepw' }">
 					<p>비밀번호가 변경되었습니다.<br>바뀐 비밀번호로 로그인하세요.</p>
 				</c:if>
-
-					<form action="./login.do" method="post">
-						<input type="text" name="l_id"><br>
-						<input type="password" name="l_pw"><br>
-						<button type="submit">로그인</button>
-					</form>
-
-				<a href="./join.do"> 회원가입 </a>
-				<a href="./findid.do"> 아이디 찾기 </a>
+					<div style="margin: 0 auto; text-align: center; width: 220px;">
+						<form action="./login.do" method="post">
+						<div style="">
+							<div style="float: left;">
+								<input type="text" name="l_id" style="margin-bottom: 6px; width: 150px;"><br>
+								<input type="password" name="l_pw" style="margin-bottom: 6px; width: 150px;"><br>
+							</div>
+							<div>
+								<button type="submit" style="float: right; height: 48px; width: 60px;">로그인</button>
+							</div>
+						</div>
+						</form>
+						<div style="display: inline-block; margin-top: 5px; ">
+							<a href="./join.do"> 회원가입</a> | 
+							<a href="./findid.do">아이디 찾기</a>
+						</div>
+					</div>
 			</c:otherwise>
 		</c:choose>
-		<br> <a href="./home.do">홈으로</a>
-		<c:if test="${sessionScope.l_id eq 'admin' }">
-		<a href="./admin.do">관리자</a> 
-		
+		<c:if test="">
+			<a href="./admin.do">관리자</a>
 		</c:if>
-
-		
 	</div>
 	<!-- end of login -->
 </body>
