@@ -4,15 +4,21 @@
 <%@ page session="false"%>
 <html>
 <head>
+<style>
+#mapthum{
+	display:none;
+}
+
+
+</style>
   <meta charset="utf-8">
     <link rel="stylesheet" href="resources/css/style.css">
     <link rel="stylesheet" href="./slider3.css">
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
-
-
-
-
-
+	
+	
+	
+	
 <title></title>
 </head>
 
@@ -68,7 +74,7 @@
       <ul id="imgholder" class="imgs">
           <li><img src="resources/img/spring.jpg" width="350px"></li>
           <li><img src="resources/img/summer.jpg" width="350px"></li>
-          <li><img src="resources/img/autumn.jpg" width="350px"></li>
+          <li><a href="./ubdetail.do?b_no=194"> <img src="resources/img/autumn.jpg" width="350px"></a></li>
           <li><img src="resources/img/winter.jpg" width="350px"></li>
       </ul>
       <div class="bullets">
@@ -90,13 +96,8 @@
   <div id ="article" style="display:flex; flex-direction: row; justify-content: flex-start; box-shadow: 1px 1px 1px 1px #C9C9C9; border-style: outset; border-radius: 10px; padding: 5px;  border-radius: 10px; padding-top: 10px;   width: 1150px; ">
 	
 
-  <iframe id ="map" src="./map.do"  width="700px" height="800px"  ></iframe>
-
-  <div style="display:flex; flex-direction: column; " align="center">
-    <div><img src="spring.jpg" width="360px" style="padding-left: 20px; "> </div>
-  </div>
-
-  </div>
+  <iframe id ="map" src="./map.do"  width="1200px" height="800px"></iframe>
+	</div>
 
 
 
