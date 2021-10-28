@@ -32,6 +32,7 @@ import com.choongangtour.service.TestServiceImplements;
 import com.choongangtour.util.FileSave;
 import com.choongangtour.util.Util;
 import com.choongangtour.web.log.LogDTO;
+import com.choongangtour.web.log.LogService;
 
 import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
 
@@ -47,10 +48,28 @@ public class TestController {
 	@Autowired
 	private Util util;
 
+	 @Autowired
+	 private LogService logService;
 	
 
 	@RequestMapping( value = "/boardRegion.do", produces="text/plain; charset=UTF-8", method=RequestMethod.GET)
 	public ModelAndView boardRegion(HttpServletRequest request)  { //보드 리스트 다 보여주기 
+		
+		String ip = util.getUserIp(request);
+		String target = "boardRegion.do"; 
+		String data = "보드리스트";
+		 
+		LogDTO log = null;
+		
+		HttpSession session = request.getSession();
+		if(session.getAttribute("l_id") != null) {
+			String id = (String)session.getAttribute("l_id");
+			log = new LogDTO(ip, target, id, data);
+		} else {
+			log = new LogDTO(ip, target, data);
+		}
+		
+		logService.writeLog(log);
 		
 		String id = request.getParameter("id");//나중에 로그인
 		
@@ -81,6 +100,23 @@ public class TestController {
 	}
 	@RequestMapping(value="/write", method=RequestMethod.POST)
 	public String adminWrite(HttpServletRequest request,  CommandMap map) throws Exception {
+		
+		String ip = util.getUserIp(request);
+		String target = "write"; 
+		String data = "글쓰기";
+		 
+		LogDTO log = null;
+		
+		HttpSession session = request.getSession();
+		if(session.getAttribute("l_id") != null) {
+			String id = (String)session.getAttribute("l_id");
+			log = new LogDTO(ip, target, id, data);
+		} else {
+			log = new LogDTO(ip, target, data);
+		}
+		
+		logService.writeLog(log);
+		
 		int re_no = util.str2Int2(request.getParameter("region"));
 		map.put("re_no", util.str2Int2(request.getParameter("region"))); //구역
 		System.out.println("map : " + map.getMap());
@@ -103,6 +139,23 @@ public class TestController {
 	@GetMapping("/adminPage")
 	public ModelAndView adminPage(HttpServletRequest request, CommandMap map) {//아드민에서 글 다 띄우기
 		ModelAndView mv = new ModelAndView("adminPage");
+		
+		String ip = util.getUserIp(request);
+		String target = "adminPage"; 
+		String data = "관리자페이지";
+		 
+		LogDTO log = null;
+		
+		HttpSession session = request.getSession();
+		if(session.getAttribute("l_id") != null) {
+			String id = (String)session.getAttribute("l_id");
+			log = new LogDTO(ip, target, id, data);
+		} else {
+			log = new LogDTO(ip, target, data);
+		}
+		
+		logService.writeLog(log);
+		
 		String searchName = request.getParameter("searchName");
 		String search = request.getParameter("search");
 		
@@ -156,11 +209,27 @@ public class TestController {
 	@GetMapping("/regionMap")
 	public String regionMap(HttpServletRequest request) {
 		
+		String ip = util.getUserIp(request);
+		String target = "regionMap"; 
+		String data = "지도";
+		 
+		LogDTO log = null;
+		
+		HttpSession session = request.getSession();
+		if(session.getAttribute("l_id") != null) {
+			String id = (String)session.getAttribute("l_id");
+			log = new LogDTO(ip, target, id, data);
+		} else {
+			log = new LogDTO(ip, target, data);
+		}
+		
+		logService.writeLog(log);
 
 		return "regionMap";
 	}
 	@GetMapping("/adminModify")// 수정하기 화면만 보여주기
 	public ModelAndView adminModify(HttpServletRequest request) {
+		
 		int b_no  = util.str2Int2(request.getParameter("b_no"));
 		ModelAndView mv = new ModelAndView("adminModify");
 		TestDTO dto = new TestDTO();
@@ -172,6 +241,23 @@ public class TestController {
 	}
 	@PostMapping("/adminModify")
 	public String adminUpdate(CommandMap map,HttpServletRequest sr)throws IOException	{
+		
+		String ip = util.getUserIp(sr);
+		String target = "adminModify"; 
+		String data = "수정하기";
+		 
+		LogDTO log = null;
+		
+		HttpSession session = sr.getSession();
+		if(session.getAttribute("l_id") != null) {
+			String id = (String)session.getAttribute("l_id");
+			log = new LogDTO(ip, target, id, data);
+		} else {
+			log = new LogDTO(ip, target, data);
+		}
+		
+		logService.writeLog(log);
+		
 		TestDTO testDTO = new TestDTO();
 		int re_no = testDTO.setRe_no(util.str2Int2(sr.getParameter("region")));//구역 
 		map.put("re_no", re_no);
@@ -187,7 +273,24 @@ public class TestController {
 		
 	}
 	@RequestMapping("/adminDelete.do")
-	public String adminDelete(Map<String, Object> map, @RequestParam("b_no") int b_no) {
+	public String adminDelete(Map<String, Object> map, @RequestParam("b_no") int b_no, HttpServletRequest request) {
+		
+		String ip = util.getUserIp(request);
+		String target = "adminDelete"; 
+		String data = "삭제하기";
+		 
+		LogDTO log = null;
+		
+		HttpSession session = request.getSession();
+		if(session.getAttribute("l_id") != null) {
+			String id = (String)session.getAttribute("l_id");
+			log = new LogDTO(ip, target, id, data);
+		} else {
+			log = new LogDTO(ip, target, data);
+		}
+		
+		logService.writeLog(log);
+		
 		map.put("b_no", b_no);
 		serviceImplements.adminDelete(map);
 		return "redirect: adminPage.do";//"redirect: adminPage.do"
@@ -199,8 +302,25 @@ public class TestController {
 		return "redirect: adminPage.do";//"redirect: adminPage.do"
 	}
 	@GetMapping("/adminDetail.do")
-	public ModelAndView adminDetail(@RequestParam("b_no") int b_no ) {
+	public ModelAndView adminDetail(@RequestParam("b_no") int b_no, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("adminDetail");
+		
+		String ip = util.getUserIp(request);
+		String target = "adminDetail.do"; 
+		String data = "관리자디테일페이지";
+		 
+		LogDTO log = null;
+		
+		HttpSession session = request.getSession();
+		if(session.getAttribute("l_id") != null) {
+			String id = (String)session.getAttribute("l_id");
+			log = new LogDTO(ip, target, id, data);
+		} else {
+			log = new LogDTO(ip, target, data);
+		}
+		
+		logService.writeLog(log);
+		
 		List<Map<String, Object>> list = serviceImplements.selectList(b_no);//수정하기 화면 보여주는 adminModify 재활용
 		mv.addObject("list", list);	
 		return mv;
@@ -210,6 +330,7 @@ public class TestController {
 	
 	@RequestMapping(value="/userWrite.do", method=RequestMethod.GET)
 	public String userWrite(HttpServletRequest request) { //보여주는 write
+		
 		HttpSession session = request.getSession();
 		if(session.getAttribute("l_id") == null) {
 			return "login";
@@ -220,7 +341,23 @@ public class TestController {
 	
 	@RequestMapping(value="/userWrite", method=RequestMethod.POST)
 	public String userWrite(HttpServletRequest request, CommandMap map) throws Exception {
+		
+		String ip = util.getUserIp(request);
+		String target = "userWrite.do"; 
+		String data = "유저게시판 글쓰기";
+		 
+		LogDTO log = null;
+		
 		HttpSession session = request.getSession();
+		if(session.getAttribute("l_id") != null) {
+			String id = (String)session.getAttribute("l_id");
+			log = new LogDTO(ip, target, id, data);
+		} else {
+			log = new LogDTO(ip, target, data);
+		}
+		
+		logService.writeLog(log);
+		
 		if(session.getAttribute("l_id") == null) {
 			return "redirect: login.do";
 		}
@@ -236,8 +373,25 @@ public class TestController {
 	}
 	
 	@RequestMapping(value="/userBoard.do")
-	public ModelAndView board(CommandMap map) {
+	public ModelAndView board(CommandMap map, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("userBoard");
+		
+		String ip = util.getUserIp(request);
+		String target = "userBoard.do"; 
+		String data = "유저게시판";
+		 
+		LogDTO log = null;
+		
+		HttpSession session = request.getSession();
+		if(session.getAttribute("l_id") != null) {
+			String id = (String)session.getAttribute("l_id");
+			log = new LogDTO(ip, target, id, data);
+		} else {
+			log = new LogDTO(ip, target, data);
+		}
+		
+		logService.writeLog(log);
+		
 		
 		if(map.containsKey("searchName")) {
 			mv.addObject("searchName", map.get("searchName"));
@@ -280,8 +434,25 @@ public class TestController {
 	}
 	
 	@RequestMapping(value="/ubdetail")
-	public ModelAndView ubdetail(CommandMap map) {
+	public ModelAndView ubdetail(CommandMap map, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("ubdetail");
+		
+		String ip = util.getUserIp(request);
+		String target = "ubdetail"; 
+		String data = "유저게시판 디테일";
+		 
+		LogDTO log = null;
+		
+		HttpSession session = request.getSession();
+		if(session.getAttribute("l_id") != null) {
+			String id = (String)session.getAttribute("l_id");
+			log = new LogDTO(ip, target, id, data);
+		} else {
+			log = new LogDTO(ip, target, data);
+		}
+		
+		logService.writeLog(log);
+		
 		Map<String, Object> detail = serviceImplements.ubDetail(map.getMap());		
 		
 		mv.addObject("detail", detail);
@@ -292,6 +463,23 @@ public class TestController {
 	//샛별수정 1020
 	@RequestMapping(value="/ubLike")
 	public @ResponseBody String ubLike(CommandMap map, HttpServletRequest request) {
+		
+		String ip = util.getUserIp(request);
+		String target = "userLike"; 
+		String data = "유저게시판 좋아요";
+		 
+		LogDTO log = null;
+		
+		HttpSession session = request.getSession();
+		if(session.getAttribute("l_id") != null) {
+			String id = (String)session.getAttribute("l_id");
+			log = new LogDTO(ip, target, id, data);
+		} else {
+			log = new LogDTO(ip, target, data);
+		}
+		
+		logService.writeLog(log);
+		
 		String chk = "0";
 		int chkInt = serviceImplements.ubLike(map.getMap());
 		chk = Integer.toString(chkInt);
@@ -299,7 +487,24 @@ public class TestController {
 	}
 	
 	@RequestMapping(value = "/map.do")
-    public ModelAndView map() {
+    public ModelAndView map(HttpServletRequest request) {
+		
+		String ip = util.getUserIp(request);
+		String target = "map"; 
+		String data = "유저게시판 지도";
+		 
+		LogDTO log = null;
+		
+		HttpSession session = request.getSession();
+		if(session.getAttribute("l_id") != null) {
+			String id = (String)session.getAttribute("l_id");
+			log = new LogDTO(ip, target, id, data);
+		} else {
+			log = new LogDTO(ip, target, data);
+		}
+		
+		logService.writeLog(log);
+		
         // 반환타입에 들어갈 수 있는 것 3가지
         // void 반환타입 없음 = 내부처리만 시키고 끝.
         // String DB에 값 없이 페이지만 호출할때
@@ -325,6 +530,7 @@ public class TestController {
 	@RequestMapping(value="/ubUpdate.do", method=RequestMethod.GET)
 	public ModelAndView ubUpdate(CommandMap map) {
 		ModelAndView mv = new ModelAndView("ubUpdate");
+		
 		Map<String, Object> detail = serviceImplements.ubDetail(map.getMap());		
 		//수정용 디테일 불러오기
 		mv.addObject("detail", detail);
@@ -333,7 +539,23 @@ public class TestController {
 	
 	@RequestMapping(value="/ubUpdate", method=RequestMethod.POST)
 	public String ubUpdate(HttpServletRequest request, CommandMap map) throws Exception {
+		
+		String ip = util.getUserIp(request);
+		String target = "ubUpdate"; 
+		String data = "유저게시판 업데이트";
+		 
+		LogDTO log = null;
+		
 		HttpSession session = request.getSession();
+		if(session.getAttribute("l_id") != null) {
+			String id = (String)session.getAttribute("l_id");
+			log = new LogDTO(ip, target, id, data);
+		} else {
+			log = new LogDTO(ip, target, data);
+		}
+		
+		logService.writeLog(log);
+		
 		if(session.getAttribute("l_id") == null) {
 			return "redirect: login.do";
 		}
