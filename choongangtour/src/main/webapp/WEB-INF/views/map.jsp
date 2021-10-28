@@ -4,13 +4,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-
+<style type="text/css">
+#imgbox img{
+	width: 350px;
+	/* margin-left: 40px; */
+}
+#imgbox h2{
+	
+}
+#imgbox{
+	width: 400px;
+	padding: 20px;
+	margin-top: 30px;
+	border-radius: 15px;
+	margin-left: 660px;
+	background-color: #c0ddff24;
+}
+#imgbox div{
+	text-align: center;
+}
+</style>
 <script type="text/javascript">
 function link1(){
 	window.parent.location.href= "./boardRegion.do?re_no=1";
 }
-
 </script>
 <script type="text/javascript">
 function link2(){
@@ -110,13 +127,13 @@ function link20(){
 
 
 <script type="text/javascript">
-
 function seoulover(){
 	var con = document.getElementById("1");
 	if(con.style.display=='none'){
 		con.style.display = 'block';
 	}else{
 		con.style.display = 'none';
+		
 	}
 }
 function seoulleave(){
@@ -518,8 +535,6 @@ function Bleave(){
 </head>
 <body>
 
-
-
 <!-- 	<h1>지역을 선택하세요</h1> -->
 	
 	<a style="float: left;">
@@ -588,102 +603,117 @@ function Bleave(){
 			<!-- <area shape="poly" coords="451,217,443,221,438,225,438,230,429,224,425,221,422,225,408,221,402,227,396,220,391,228,382,222,379,226,373,226,370,231,363,235,359,241,358,243,358,252,347,250,341,244,339,247,338,250,325,250,322,249,325,250,317,257,322,260,319,262,315,261,311,257,308,262,303,261,308,268,307,273,301,267,299,272,294,272,295,276,301,280,304,285,300,285,300,298,301,303,297,308,296,313,302,310,306,316,313,315,315,317,316,323,310,323,307,325,309,330,305,339,302,341,295,343,299,352,295,358,299,361,300,365,306,365,307,368,315,368,320,375,326,381,324,386,321,389,325,393,335,393,339,393,342,398,346,396,344,393,339,392,342,386,345,387,348,385,343,381,347,375,353,374,354,372,345,367,351,359,356,359,355,363,356,365,359,365,361,357,366,357,368,352,379,351,382,357,382,369,378,374,376,378,374,379,373,385,367,389,363,385,359,387,357,395,362,401,365,404,371,402,382,406,388,403,391,399,399,401,405,404,410,398,414,392,419,391,426,390,431,395,429,399,433,400,439,397,450,401,454,389,458,376,458,367,464,358,463,349,452,359,444,355,445,350,450,346,447,342,446,334,448,315,446,309,450,313,455,306,453,301,455,296,455,292,453,286,453,280,458,275,460,265,456,253,455,239,455,233,457,229" 
 			href="./board.do?bb_cate=6" target="_self" onmouseout="regional_map()" onmouseover="regional_map_on('gn')"> -->
 		</map>
-			<div id="imgbox" >
-				<div id ="1" style="display:none; width:200px; margin-left:650px; position:absolute; z-index:1;">
+			<div id="imgbox">
+				<div id ="1" style="display:none; z-index:1;">
+				<h2>서울</h2>
 				<img src="./resources/img/seoulSMT 서울 남산타워.jfif" height="200px">
 				<img src="./resources/img/seoulSL1 서울 석촌호수.png" height="200px">
 				<img src="./resources/img/seoulGP1 서울 경복궁.jpg" height="200px">
 				</div>
-				
-				<div id ="2" style="display:none; width:200px; margin-left:650px; position:absolute; z-index:1;">
+				<div id ="2" style="display:none; z-index:1;">
+				<h2>경기도</h2>
 				<img src="./resources/img/gyungiCAST 경기도 행주산성.jpg" height="200px">
 				<img src="./resources/img/gyungiCASTinHWA 경기도 수원화성.jpg" height="200px">
 				<img src="./resources/img/gyungiTemple 경기도 신륵사.jpg" height="200px">
 				</div>
-				
-				<div id ="3" style="display:none; width:200px; margin-left:650px; position:absolute; z-index:1;">
+				<div id ="3" style="display:none; z-index:1;">
+				<h2>강원도</h2>
 				<img src="./resources/img/gwangwonSMT 강원도 설악산.jpg" height="200px">
 				<img src="./resources/img/gwangwonBR 강원도 대관령.jpg" height="200px">
 				<img src="./resources/img/gwangwonBeach 강원도 정동진해변.jpg" height="200px">
 				</div>
-				
-				<div id ="4" style="display:none; width:200px; margin-left:650px; position:absolute; z-index:1;">
+				<div id ="4" style="display:none; z-index:1;">
+				<h2>인천</h2>
 				<img src="./resources/img/incheonPort 인천 개항장 거리.jpg" height="200px">
 				<img src="./resources/img/incheonLand 인천 능허대지.jpg" height="200px">
 				<img src="./resources/img/incheonEight 인천 팔미도.jpg" height="200px">
 				</div>
-				
-				<div id ="5" style="display:none; width:200px; margin-left:650px; position:absolute; z-index:1;">
+				<div id ="5" style="display:none; z-index:1;">
+				<h2>세종</h2>
 				<img src="./resources/img/sejongHRC 세종 합강캠핑장.png" height="200px">
 				<img src="./resources/img/sejongSPACE 세종 우즈측지관센터.png" height="200px">
 				<img src="./resources/img/sejongJandok 세종 뒤웅박고을.png" height="200px">
 				</div>
-				<div id ="6" style="display:none; width:200px; margin-left:650px; position:absolute; z-index:1;">
+				<div id ="6" style="display:none; z-index:1;">
+				<h2>경상북도</h2>
 				<img src="./resources/img/gyungbookBridge 경주 월정교.jfif" height="200px">
 				<img src="./resources/img/gyungbookHand 포항 호미곶 절경.jfif" height="200px">
 				<img src="./resources/img/gyungbookRIVER 영주 무섬마을.jfif" height="200px">
 				</div>
-				<div id ="7" style="display:none; width:200px; margin-left:650px; position:absolute; z-index:1;">
+				<div id ="7" style="display:none; z-index:1;">
+				<h2>경상남도</h2>
 				<img src="./resources/img/gyungnamTRAIN 경남 욕지섬 모노레일.jpg" height="200px">
 				<img src="./resources/img/gyungnamFLOWER  경남 한국 궁중 꽃 박물관.png" height="200px">
 				<img src="./resources/img/gyungnamISLAND 경남 외도 보타니아.png" height="200px">
 				</div>
-				<div id ="8" style="display:none; width:200px; margin-left:650px; position:absolute; z-index:1;">
+				<div id ="8" style="display:none; z-index:1;">
+				<h2>전라북도</h2>
 				<img src="./resources/img/junbukGUN 전북 군산 삼도귀범.jpg" height="200px">
 				<img src="./resources/img/junbukLOVE 전북 남원 광한루원.jpg" height="200px">
 				<img src="./resources/img/junbukMT 전북 정읍 내장산 국립공원.jpg" height="200px">
 				</div>
-				<div id ="9" style="display:none; width:200px; margin-left:650px; position:absolute; z-index:1;">
+				<div id ="9" style="display:none; z-index:1;">
+				<h2>전라남도</h2>
 				<img src="./resources/img/junnamCAR 전남 목포 해상케이블카.jpg" height="200px">
 				<img src="./resources/img/junnamDAMA 진도 대마도.jfif" height="200px">
 				<img src="./resources/img/junnamRETRO 전남 추억의 골목.jpg" height="200px">
 				</div>
-				<div id ="10" style="display:none; width:200px; margin-left:650px; position:absolute; z-index:1;">
+				<div id ="10" style="display:none; z-index:1;">
+				<h2>충청북도</h2>
 				<img src="./resources/img/choongbookBANK 문광 저수지 은행나무길.jpg" height="200px">
 				<img src="./resources/img/choongbookGUDAM 충북 단양 구담봉.jpg" height="200px">
 				<img src="./resources/img/choongbookGUSO 옥천 부소담악.jpg" height="200px">
 				</div>
-				<div id ="11" style="display:none; width:200px; margin-left:650px; position:absolute; z-index:1;">
+				<div id ="11" style="display:none; z-index:1;">
+				<h2>충청남도</h2>
 				<img src="./resources/img/choongnamBEACH 충남 태안 만리포.jpg" height="200px">
 				<img src="./resources/img/choongnamONSEN 충남 온양온천.jpg" height="200px">
 				<img src="./resources/img/choongnamWAR 천안 독입기념관.jpg" height="200px">
 				</div>
-				<div id ="12" style="display:none; width:200px; margin-left:650px; position:absolute; z-index:1;">
+				<div id ="12" style="display:none; z-index:1;">
+				<h2>대구</h2>
 				<img src="./resources/img/daeguMTPARK 대구 비슬산 군립공원.png" height="200px">
 				<img src="./resources/img/daeguSUNGMO 대구 성모당.jfif" height="200px">
 				<img src="./resources/img/daeguVIL1 마비정 벽화마을.png" height="200px">
 				</div>
-				<div id ="13" style="display:none; width:200px; margin-left:650px; position:absolute; z-index:1;">
+				<div id ="13" style="display:none; z-index:1;">
+				<h2>대전</h2>
 				<img src="./resources/img/daejeonCARYONG 대전 과기대 카리용.jpg" height="200px">
 				<img src="./resources/img/daejeonEXPO 대전 엑스포 과학공원.jpg" height="200px">
 				<img src="./resources/img/daejeonSUNSHIM 대전 성심당.jpg" height="200px">
 				</div>
-				<div id ="14" style="display:none; width:200px; margin-left:650px; position:absolute; z-index:1;">
+				<div id ="14" style="display:none; z-index:1;">
+				<h2>울산</h2>
 				<img src="./resources/img/ulsanBIG.1jpg 울산 대공원.jpg" height="200px">
 				<img src="./resources/img/ulsanGANJURE 울산 간절곶.jpg" height="200px">
 				<img src="./resources/img/ulsanGANWARMT 울산 간월산.jpg" height="200px">
 				</div>
-				<div id ="15" style="display:none; width:200px; margin-left:650px; position:absolute; z-index:1;">
+				<div id ="15" style="display:none; z-index:1;">
+				<h2>제주도</h2>
 				<img src="./resources/img/jejuSUN 제주 성산일출봉.jpg" height="200px">
 				<img src="./resources/img/jejuWATERFALL 제주 천지연 폭포.jpg" height="200px">
 				<img src="./resources/img/jejuWOODO 제주 우도 올레길.jpg" height="200px">
 				</div>
-				<div id ="16" style="display:none; width:200px; margin-left:650px; position:absolute; z-index:1;">
+				<div id ="16" style="display:none; z-index:1;">
+				<h2>독도</h2>
 				<img src="./resources/img/dokdo11 독도.png" height="200px">
 				<img src="./resources/img/dokdo22.png" height="200px">
 				<img src="./resources/img/dokdo33.png" height="200px">
 				</div>
-				<div id ="17" style="display:none; width:200px; margin-left:650px; position:absolute; z-index:1;">
+				<div id ="17" style="display:none; z-index:1;">
+				<h2>울릉도</h2>
 				<img src="./resources/img/ulungSADONG 울릉도 사동.jpg" height="200px">
 				<img src="./resources/img/ulungSUN 내수전 일출전망대.png" height="200px">
 				<img src="./resources/img/ulunMT 울릉도 성인봉.jpg" height="200px">
 				</div>
-				<div id ="18" style="display:none; width:200px; margin-left:650px; position:absolute; z-index:1;">
+				<div id ="18" style="display:none; z-index:1;">
+				<h2>광주</h2>
 				<img src="./resources/img/gwangjuMT 광주 무등산국립공원.jfif" height="200px">
 				<img src="./resources/img/gwangjuPARK 광주 518 기념공원.jfif" height="200px">
 				<img src="./resources/img/gwangjuSONG 광주 1913송정역시장.jpg" height="200px">
 				</div>
-				<div id ="20" style="display:none; width:200px; margin-left:650px; position:absolute; z-index:1;">
+				<div id ="20" style="display:none; z-index:1;">
+				<h2>부산</h2>
 				<img src="./resources/img/busanbch1(해운대.jfif" height="200px">
 				<img src="./resources/img/busanMT1 황령산.jfif" height="200px">
 				<img src="./resources/img/busanvil1  부산 호천마을.jfif" height="200px">

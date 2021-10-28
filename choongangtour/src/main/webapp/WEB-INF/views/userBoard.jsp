@@ -78,7 +78,7 @@ table.hl td:hover{
 							</tr>
 							<c:forEach items="${hotList }" var="hl" >
 								<tr>
-									<td onclick="location.href='./ubdetail.do?b_no='+${hl.b_no}" style="cursor: pointer; padding-top: 10px;">${hl.b_title }</td>
+									<td onclick="location.href='./ubdetail.do?b_no='+${hl.b_no}" style="text-align:left; cursor: pointer; padding-top: 10px; ">${hl.b_title }</td>
 									<td>${hl.b_date }</td>
 									<td style="text-align: center;">${hl.b_like }</td>
 								</tr>
@@ -102,7 +102,7 @@ table.hl td:hover{
 						<tr>
 							<td>${l.b_no }</td>
 							<td onclick="location.href='./ubdetail.do?b_no='+${l.b_no}"
-								style="width: 700px; cursor: pointer;">[${l.re_category}]
+								style="width: 700px; cursor: pointer; text-align: left;">[${l.re_category}]
 								${l.b_title }</td>
 							<td>${l.b_date }</td>
 							<td>${l.l_name }</td>

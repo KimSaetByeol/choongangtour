@@ -16,14 +16,14 @@
 
 	<div align="center" style="padding-bottom: 10px; padding-top: 10px;">
 		<div id="banner"
-			style="border-radius: 10px; width: 1500px; padding-left: 5px; padding-top: 10px; padding-bottom: 5px; display: flex; flex-direction: row; justify-content: space-between;; box-shadow: 1px 1px 1px 1px #C9C9C9; border-style: outset;">
+			style="border-radius: 10px; width: 1470px; padding-left: 5px; padding-top: 10px; padding-bottom: 5px; display: flex; flex-direction: row; justify-content: space-between;; box-shadow: 1px 1px 1px 1px #C9C9C9; border-style: outset;">
 			<div>
 				<img src="resources/img/CAT.jpg" width="600px">
 			</div>
 			<div class="slider">
-				<input type="radio" name="slide" id="slide1" checked> <input
+				<input type="radio" name="slide" id="slide1"> <input
 					type="radio" name="slide" id="slide2"> <input type="radio"
-					name="slide" id="slide3"> <input type="radio" name="slide"
+					name="slide" id="slide3" checked> <input type="radio" name="slide"
 					id="slide4">
 				<ul id="imgholder" class="imgs">
 					<li><a href="./ubdetail.do?b_no=195"><img
