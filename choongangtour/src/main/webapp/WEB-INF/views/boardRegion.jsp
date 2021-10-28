@@ -9,6 +9,21 @@
 <title>boardRegion</title>
 
 <style type="text/css">
+table#infoTB {
+	min-width: 850px;
+	text-align: center;
+}
+
+table#infoTB td {
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+.tbinfo {
+	padding: 5 20 5 20;
+	width: 90px;
+}
+
 .jzdbox1 {
 	width: 300px;
 	background: #332f2e;
@@ -118,14 +133,13 @@ span[data-title]:hover:after, div[data-title]:hover:after {
 		style="padding-top: 20px; padding-bottom: 30px; display: flex; flex-direction: row; justify-content: space-evenly;">
 		<div style="width: 20px;"></div>
 
-
 		<div id="article" align="center"
 			style="display: flex; flex-direction: column; justify-content: flex-start; box-shadow: 1px 1px 1px 1px #C9C9C9; border-style: outset; border-radius: 10px; padding: 5px; border-radius: 10px; padding-top: 10px; width: 1150px;">
 
 			<div id="main" align="center">
 				<c:if test="${param.b_title != null  }">
 					<!--  menu 바  -->
-					<div id="menu" style="text-align: center">
+					<div id="menu" style="text-align: center; margin: 10 0 10 0;">
 						<a
 							href="./boardRegion.do?re_no=${param.re_no }&b_title=${param.b_title}">상세정보</a>
 						&ensp;&ensp; <a
@@ -148,7 +162,7 @@ span[data-title]:hover:after, div[data-title]:hover:after {
 				<div id="모든 관광지들 " align="center">
 					<c:if test="${fn:length(list) == 0 }">
 						<!--  상세정보값 없으면 이거 띄우기  (상세정보 페이지에 이거 안 보이게 할려고)-->
-						<h1 style="font-size: xxx-large; font-weight: bold;">${list2[0].re_category }</h1>
+						<h1 style="font-size: 30pt; font-weight: bold;">${list2[0].re_category }</h1>
 						<!-- 각 행정구역  re_category-->
 						<hr>
 						<div id="list2,rightBeforeDetailSeparatedBySites 부산 황령산 / 서울 남산타워">
@@ -200,9 +214,9 @@ span[data-title]:hover:after, div[data-title]:hover:after {
 						<c:if test="${status.count == 1}">
 							<!-- 있다면 그냥 foreach문 무시하고 하나로 보이게  -->
 							<option value="${l.re_category }"
-								style="font-size: xxx-large; font-weight: bold;">${l.re_category}</option>
+								style="font-size: 30pt; font-weight: bold;">${l.re_category}</option>
 							<option value="${l.b_title }"
-								style="font-size: x-large; font-weight: bold;">${l.b_title }</option>
+								style="font-size: x-large; font-weight: bold; margin: 10 0 10 0;">${l.b_title }</option>
 							<option value="${l.b_date }">업로드 날짜 :
 								<fmt:formatDate value="${l.b_date }" pattern="yyyy-MM-dd HH:mm" /></option>
 
@@ -238,46 +252,77 @@ span[data-title]:hover:after, div[data-title]:hover:after {
 					</c:forEach>
 					<c:if test="${param.b_title != null }">
 						<br>
-						<div id=box>
-							<table>
+						<div id=box
+							style="width: 800px; min-height: 180px; background-color: #EEF3ED; padding-top: 25px; padding-bottom: 25px;">
+							<table id="infoTB">
 								<tr valign="top">
 									<!--  이것또한 상단 이미지 미리보기와 같게 region의 첫번쨰 게시물에 있는 정보만 보여주게 한다.  -->
-									<th>주 소</th>
-
-									<td>${list[0].b_addr }</td>
+									<th class="tbinfo">주 소</th>
+									<td>${list[0].b_addr }"</td>
 								</tr>
 
 								<tr valign="top">
-									<th>홈페이지</th>
-									<td>${list[0].b_web}</td>
+									<th class="tbinfo">홈페이지</th>
+									<td><a href=" ${list[0].b_web }">${list[0].b_title}
+											홈페이지 바로가기 👈</a></td>
 								</tr>
 								<tr valign="top">
-									<th>전화번호</th>
+									<th class="tbinfo">전화번호</th>
 									<td>${list[0].b_tele}</td>
 								</tr>
 								<tr valign="top">
-									<th>이용시간</th>
-									<td>${list[0].b_time }</td>
+									<th class="tbinfo">이용시간</th>
+									<td>
+									<c:choose>
+										<c:when test="${list[0].b_no eq 409 }">
+											<!-- 409, 한국 궁중 꽃 박물관 -->
+											<a href="${list[0].b_time }">자세한 관람시간 보러가기 👈</a>
+										</c:when>
+										<c:when test="${list[0].b_no eq 349 }">
+											<!-- 349, 경복궁 -->
+											<a href="${list[0].b_time }">경복궁 관람시간 보러가기 👈</a>
+										</c:when>
+										<c:otherwise>
+													${list[0].b_time }
+										</c:otherwise>
+									</c:choose>
+									</td>
 								</tr>
 								<tr valign="top">
-									<th>이용요금</th>
-									<td>${list[0].b_price }</td>
+									<th class="tbinfo">이용요금</th>
+									<td>
+									<c:choose>
+										<c:when test="${list[0].b_no eq 412 || list[0].b_no eq 409}">
+											<a href="${list[0].b_price }">자세한 이용요금 보러가기 👈</a>
+										</c:when>
+										<c:otherwise>
+											${list[0].b_price }
+										</c:otherwise>
+									</c:choose>
+									</td>
 								</tr>
 								<tr valign="top">
-									<th>기타 정보</th>
-									<td>${list[0].b_tip }</td>
+									<th class="tbinfo">기타 정보</th>
+									<td><c:choose>
+											<c:when test="${list[0].b_no eq 422 }">
+												<!-- 422, 정읍 내장산 국립공원 -->
+												<a href="${list[0].b_tip }">자세한 공원안내 보러가기 👈</a>
+											</c:when>
+											<c:when test="${list[0].b_no eq 349 }">
+												<!-- 349, 경복궁 -->
+												<a href="${list[0].b_tip }">경복궁 관람규칙 보러가기 👈</a>
+											</c:when>
+											<c:otherwise>
+												${list[0].b_tip }
+											</c:otherwise>
+										</c:choose></td>
 								</tr>
-
-
-
 							</table>
-
-
 						</div>
 					</c:if>
 					<!--  맨 아래에 있는 출저 -->
 
-					<div id="citations" style="float: right">
+					<div id="citations" style="float: right; padding: 10 10 10 0;">
 						<!--  출저 보여주기  -->
 						<c:if test="${param.re_no == 1  && param.b_title != null}">
 							<!--  서울이면  -->
@@ -360,10 +405,7 @@ span[data-title]:hover:after, div[data-title]:hover:after {
 							https://www.visitbusan.net/kr/index.do</a>
 					</c:if>
 				</div>
-
-
 				<br>
-
 			</div>
 		</div>
 		<c:import url="./sidebar.jsp" />
