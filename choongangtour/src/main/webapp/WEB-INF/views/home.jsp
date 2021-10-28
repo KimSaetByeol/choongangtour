@@ -98,11 +98,7 @@
 
 <div id="aside"  style="padding-right: 30px; padding-left: 10px; display:flex; flex-direction: column;width:350px; border-radius: 10px; ">
   <div style=" border-radius: 10px; box-shadow: 1px 1px 1px 1px #C9C9C9;border-style: outset; padding: 10px; ">
-  
-  
-  
-  
-  	
+
   <c:import url="/infobox.do"></c:import>
   
   

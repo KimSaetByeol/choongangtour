@@ -65,6 +65,7 @@
 <button onclick="location.href='./adminPage.do'">관리자 관광 글 목록</button>
 <button onclick="location.href='./logList.do'">로그 목록</button>
 <button onclick="location.href='./write.do'">관리자 관광 정보 글 쓰기</button>
+<button onclick="location.href='./userList.do'">유저 리스트</button>
 </div>
 
 
@@ -72,6 +73,12 @@
 
 
 <div id="aside"  style="padding-right: 30px; padding-left: 10px; display:flex; flex-direction: column;width:350px; border-radius: 10px; ">
+<div style=" border-radius: 10px; box-shadow: 1px 1px 1px 1px #C9C9C9;border-style: outset; padding: 10px; ">
+
+  <c:import url="/infobox.do"></c:import>
+  
+  
+  </div>
   <div id='calendar'align="center">
     <div class="jzdbox1 jzdbasf jzdcal">
 

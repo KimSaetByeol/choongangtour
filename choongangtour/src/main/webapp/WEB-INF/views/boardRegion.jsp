@@ -8,35 +8,98 @@
 <head>
 <title>boardRegion</title>
 
-    <link rel="stylesheet" href="resources/css/style.css">
 <style type="text/css">
-#menu {
-	font-size: 15pt;
-	height: 100px;
-	text-align: center;
-	line-height: 100px;
+
+.jzdbox1 {
+  width:300px;
+  background:#332f2e;
+  border-radius:5px;
+  overflow:hidden;
+  display:block;
+  margin-bottom:5px;
+  box-shadow:0 0 10px #201d1c;
+  margin:0 auto;
+  margin-top:30px;
 }
 
-
-
-#uploadDate {
-	float: right;
+.jzdcal {
+  padding:0 0px 0px 0px;
+  box-sizing:border-box!important;
+  background:#749d9e;
+  background: -webkit-linear-gradient(#749d9e, #b3a68b)!important;
+  background: -o-linear-gradient(#749d9e, #b3a68b)!important;
+  background: -moz-linear-gradient(#749d9e, #b3a68b)!important;
+  background: linear-gradient(#749d9e, #b3a68b)!important;
 }
 
-#content {
-position: relative;
+.jzdcalt {
+  font:18px 'Roboto';
+  font-weight:700;
+  color:#f7f3eb;
+  display:block;
+  margin:18px 0 0 0;
+  text-transform:uppercase;
+  text-align:center;
+  letter-spacing:1px;
 }
 
-#contextText {
-	font-size: 15pt;
-	position: relative;
+.jzdcal span {
+  font:11px 'Roboto';
+  font-weight:400;
+  color:#f7f3eb;
+  text-align:center;
+  width:42px;
+  height:42px;
+  display:inline-block;
+  float:left;
+  overflow:hidden;
+  line-height:40px;
 }
-#box{
-  border: 1px solid #bfbfbf;
- clear: both;
- background-color: #fafafa;
-    color: #081e52;
+
+.jzdcal .jzdb:before {
+  opacity:0.3;
+  content:'o';
 }
+
+.circle {
+  border:1px solid #f7f3eb;
+  box-sizing:border-box!important;
+  border-radius:200px!important;
+}
+
+span[data-title]:hover:after,
+div[data-title]:hover:after {
+  font:11px 'Roboto';
+  font-weight:400;
+  content:attr(data-title);
+  position:absolute;
+  margin:0 0 100px;
+  background:#282423;
+  border:1px solid #f7f3eb;
+  color:#f7f3eb;
+  padding:5px;
+  z-index:9999;
+  min-width:150px;
+  max-width:150px;
+}
+
+#dropdown1{
+  position:relative;
+  display: inline-block;
+}
+#dropdown-content{
+  display: none;
+  position: absolute;
+  background-color: white;
+  padding: 5px;
+  min-width: 50px;
+}
+#dropdown-content a{
+  display: block;
+}
+
+#dropdown1:hover #dropdown-content{display: block;}
+
 
 </style>
 
@@ -88,12 +151,12 @@ position: relative;
   <div style="width:20px;"></div>
 
 
-  <div id ="article" style="display:flex; flex-direction: row; justify-content: flex-start; box-shadow: 1px 1px 1px 1px #C9C9C9; border-style: outset; border-radius: 10px; padding: 5px;  border-radius: 10px; padding-top: 10px;   width: 1150px; ">
+  <div id ="article" align="center" style="display:flex; flex-direction: column; justify-content: flex-start; box-shadow: 1px 1px 1px 1px #C9C9C9; border-style: outset; border-radius: 10px; padding: 5px;  border-radius: 10px; padding-top: 10px;   width: 1150px; ">
 
-	<div id="main">
+	<div id="main" align="center">
 	<c:if test="${param.b_title != null  }">
 	<!--  menu 바  -->
-		<div id="menu" style="text-align: center">
+		<div id="menu" style="text-align: center"  >
 			<a href="./boardRegion.do?re_no=${param.re_no }&b_title=${param.b_title}">상세정보</a> &ensp;&ensp;
 			<a href="./regionMap.do?re_no=${param.re_no }&b_title=${param.b_title}">지도</a> &ensp;&ensp;<!--  re_no를 request로 받아와서 mv로 가져오기 -->
 			<a href="./boardRegion.do?re_no=${param.re_no }">주변 관광지</a> &ensp;&ensp;<!--  re_no를 request로 받아와서 mv로 가져오기 -->
@@ -107,18 +170,18 @@ position: relative;
 		
 		각 랜드마크를 클릭하면 랜드마크 설명으로 넘어갑니다.
 		<!--  1st paragraph---------------------------------------------------- -->
-		<div id="모든 관광지들 ">
+		<div id="모든 관광지들 "  align="center">
 			 <c:if test="${fn:length(list) == 0 }"> <!--  상세정보값 없으면 이거 띄우기  (상세정보 페이지에 이거 안 보이게 할려고)-->
 				<h1 style="font-size: xxx-large; font-weight: bold;">${list2[0].re_category }</h1> <!-- 각 행정구역  re_category-->
 			<div id="list2,rightBeforeDetailSeparatedBySites 부산 황령산 / 서울 남산타워" style="border: 2px solid black">
 			<!--  select * from boardRegionview2 where re_no= #re_no and visi =#visi  order by b_no 지역에 있는 관광지(3번지) (6번지) (7번지로 지정했음) 들을 찾아라 -->
 			<!--  각 지역(region)에는 보여주는 게시물이 4(단락)/3/4  총(10~12) 게시물(단락)으로  구성되어 있고, 이것에 따라 n번지의 이미지를 미리보기 할 수 있음  -->
-				<h2>${list2[3].b_title} </h2> <img alt="" src="${list2[3].b_url }"  height="600px" onclick="location.href='boardRegion.do?re_no=${list2[0].re_no}&b_title=${list2[0].b_title}'"> <!-- region에 있는 0번지의 이미지-->
+				<h2>${list2[3].b_title} </h2> <img alt="" src="${list2[3].b_url }" width="800px"  onclick="location.href='boardRegion.do?re_no=${list2[0].re_no}&b_title=${list2[0].b_title}'"> <!-- region에 있는 0번지의 이미지-->
 			</div><br>
 			
 			<c:if test="${list2[6].b_title != null}"><!-- 만약 관광지가 있다면 -->
 			<div id="list2,rightBeforeDetailSeparatedBySites 부산 호천마을/ " style="border: 2px solid black">
-				<h2>${list2[6].b_title} </h2> <img alt="" src="${list2[6].b_url }"  height="600px" onclick="location.href='boardRegion.do?re_no=${list2[6].re_no}&b_title=${list2[6].b_title}'"> <!-- region에 있는 6번지의 이미지-->
+				<h2>${list2[6].b_title} </h2> <img alt="" src="${list2[6].b_url }" width="800px;"  onclick="location.href='boardRegion.do?re_no=${list2[6].re_no}&b_title=${list2[6].b_title}'"> <!-- region에 있는 6번지의 이미지-->
 			</div><br>
 			
 			</c:if>
@@ -133,15 +196,16 @@ position: relative;
 		
 		</div>
 		
-		<div id="DetailedInfoOnTheSelected"><!--  상세정보 -->
+		<div id="DetailedInfoOnTheSelected"  ><!--  상세정보 -->
 		<c:forEach items="${list }" var="l" varStatus="status" >
 		 <c:if test="${status.count == 1}"><!-- 있다면 그냥 foreach문 무시하고 하나로 보이게  -->
 		            <option value="${l.re_category }"  style="font-size: xxx-large; font-weight: bold;">${l.re_category}</option> <br>
 		            <option value="${l.b_title }" style="font-size: x-large; font-weight: bold;">${l.b_title }</option>
-		            <option value="${l.b_date }" style="float:right;" >업로드 날짜 : <fmt:formatDate value="${l.b_date }" pattern="yyyy-MM-dd HH:mm"/></option>
+		            <option value="${l.b_date }"  >업로드 날짜 : <fmt:formatDate value="${l.b_date }" pattern="yyyy-MM-dd HH:mm"/></option>
 		        </c:if>
 
 		</c:forEach>
+		
 		<c:forEach items="${list }" var="l">
 		<c:choose>
 			<c:when test="${l.b_url != null}"> <br>  <!--  이미지 있으면 보여주고  -->
@@ -276,6 +340,12 @@ position: relative;
 
 
 <div id="aside"  style="padding-right: 30px; padding-left: 10px; display:flex; flex-direction: column;width:350px; border-radius: 10px; ">
+<div style=" border-radius: 10px; box-shadow: 1px 1px 1px 1px #C9C9C9;border-style: outset; padding: 10px; ">
+
+  <c:import url="/infobox.do"></c:import>
+  
+  
+  </div>
   <div id='calendar'align="center">
     <div class="jzdbox1 jzdbasf jzdcal">
 
