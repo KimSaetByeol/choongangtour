@@ -244,7 +244,7 @@ span[data-title]:hover:after, div[data-title]:hover:after {
 						<div id="content">
 							<table>
 								<tr>
-									<td id="contextText"><br>${l.b_content}<br></td>
+									<td id="contextText"><br><p style="line-height: 2.2;">${l.b_content}<p><br></td>
 
 								</tr>
 							</table>
