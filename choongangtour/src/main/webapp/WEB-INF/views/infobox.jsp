@@ -55,10 +55,22 @@ function goInfo() {
 			</c:when>
 
 			<c:otherwise>
-				<div id="menu">
-					<button type="button" onclick="location.href='login.do'">
-						로그인</button>
-				</div>
+				<c:if test="${param.code eq 'loginfail' }">
+					<p id="error">로그인 실패, 아이디나 비밀번호를 다시 입력하세요.</p>
+				</c:if>
+				<c:if test="${param.code eq 'join' }">
+					<p style="color: gray;">회원가입을 축하합니다!<br>가입한 아이디로 로그인하세요.</p>
+				</c:if>
+				<c:if test="${code eq 'changepw' }">
+					<p>비밀번호가 변경되었습니다.<br>바뀐 비밀번호로 로그인하세요.</p>
+				</c:if>
+
+					<form action="./login.do" method="post">
+						<input type="text" name="l_id"><br>
+						<input type="password" name="l_pw"><br>
+						<button type="submit">로그인</button>
+					</form>
+
 				<a href="./join.do"> 회원가입 </a>
 				<a href="./findid.do"> 아이디 찾기 </a>
 			</c:otherwise>
