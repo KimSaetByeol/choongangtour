@@ -36,7 +36,7 @@ import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
 	 
 	 @RequestMapping(value = "/userList.do", method = RequestMethod.GET) 
 	 public ModelAndView getUserList(HttpServletRequest request) throws Exception {
-			ModelAndView mv = new ModelAndView("user/userList");
+			ModelAndView mv = new ModelAndView("/userList");
 			
 			String ip = util.getUserIp(request);
 			String target = "userList.do"; 
@@ -98,7 +98,7 @@ import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
 	 
 	 @RequestMapping(value = "/logList.do", method = RequestMethod.GET) 
 		public ModelAndView logList(HttpServletRequest request) {
-			ModelAndView mv = new ModelAndView("user/logList");
+			ModelAndView mv = new ModelAndView("/logList");
 			
 			String searchName = request.getParameter("searchName");
 			String search = request.getParameter("search");
