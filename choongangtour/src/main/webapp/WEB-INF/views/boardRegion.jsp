@@ -244,7 +244,7 @@ span[data-title]:hover:after, div[data-title]:hover:after {
 						<div id="content">
 							<table>
 								<tr>
-									<td id="contextText"><br><p style="line-height: 2.2;">${l.b_content}<p><br></td>
+									<td id="contextText"><br><p style="line-height: 2.2;">${l.b_content}<p></td>
 
 								</tr>
 							</table>
@@ -258,7 +258,7 @@ span[data-title]:hover:after, div[data-title]:hover:after {
 								<tr valign="top">
 									<!--  이것또한 상단 이미지 미리보기와 같게 region의 첫번쨰 게시물에 있는 정보만 보여주게 한다.  -->
 									<th class="tbinfo">주 소</th>
-									<td>${list[0].b_addr }"</td>
+									<td>${list[0].b_addr }</td>
 								</tr>
 
 								<tr valign="top">
