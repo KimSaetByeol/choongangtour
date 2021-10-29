@@ -16,32 +16,26 @@ var l_type = "88";
 const endPoint = 6;
 const select = [0, 0, 0, 0, 0, 0];
 
-window.onload = function() {
+// 요거 새로 만들어서
+$(function(){
+	let count = 0;
+	qList(count);
 	
-	function calResult() {
-		l_type = select.indexOf(Math.max(...select));
-		console.log(l_type);
-		return l_type;
-	}
-
-	//결과페이지 띄우는 함수
-	function setResult() {
-		let point = calResult();
-		const resultName = document.querySelector(".resultname");
-		resultName.innerHTML = resultList[point].name;
-
-		const resultDesc = document.querySelector(".resultDesc");
-		resultDesc.innerHTML = resultList[point].desc;
-
+	//질문란 함수
+	function qList(count) {
+		if (count === endPoint) {
+			goResult();
+			return;
+		}
+		var q = document.querySelector(".qBox");
+		q.innerHTML = testList[count].q;
+		for (let i in testList[count].a) {
+			aList(testList[count].a[i].answer, count, i);
+		}
+		var status = document.querySelector(".statusBar");
+		status.style.width = (100 / endPoint) * (count + 1) + "%";
 	}
 	
-	//결과페이지 가는 함수
-	function goResult() {
-		$("#test").hide();
-		$("#result").show();
-		setResult();
-	}
-
 	//답변란 함수
 	function aList(ansT, count, idx) {
 		var a = document.querySelector(".aBox");
@@ -49,7 +43,6 @@ window.onload = function() {
 		answer.classList.add("answerList");
 		a.appendChild(answer);
 		answer.innerHTML = ansT;
-
 		answer.addEventListener("click", function() {
 			var list = document.querySelectorAll(".answerList")
 			for (i = 0; i < list.length; i++) {
@@ -60,32 +53,31 @@ window.onload = function() {
 			for (i = 0; i < target.length; i++) {
 				select[target[i]] += 1;
 			}
-
 			qList(++count);
 		}, false);
 	}
-
-	//질문란 함수
-	function qList(count) {
-		if (count === endPoint) {
-			goResult();
-			return;
-		}
-
-		var q = document.querySelector(".qBox");
-		q.innerHTML = testList[count].q;
-		for (let i in testList[count].a) {
-			aList(testList[count].a[i].answer, count, i);
-		}
-
-		var status = document.querySelector(".statusBar");
-		status.style.width = (100 / endPoint) * (count + 1) + "%";
+	
+	//결과페이지 가는 함수
+	function goResult() {
+		$("#test").hide();
+		$("#result").show();
+		setResult();
 	}
-	let count = 0;
-	qList(count);
-}
-
-
+})
+	
+	function calResult() {
+		l_type = select.indexOf(Math.max(...select));
+		console.log(l_type);
+		return l_type;
+	}
+	//결과페이지 띄우는 함수
+	function setResult() {
+		let point = calResult();
+		const resultName = document.querySelector(".resultname");
+		resultName.innerHTML = resultList[point].name;
+		const resultDesc = document.querySelector(".resultDesc");
+		resultDesc.innerHTML = resultList[point].desc;
+	}
 //ajax를 여기에
 function clickB(){
 	$.ajax({
@@ -102,8 +94,6 @@ function clickB(){
 	});
 	return false;
 }
-
-
 //테스트페이지 가는 함수
 function goTest() {
 	if(${sessionScope.l_id ne null }) {
@@ -114,7 +104,6 @@ function goTest() {
 		location.href = "login.do";
 	}
 }
-
 </script>
 </head>
 <body>
@@ -160,7 +149,7 @@ function goTest() {
 	</div>
 	
 	
-		</div>
+		</div> 
 
 
 
