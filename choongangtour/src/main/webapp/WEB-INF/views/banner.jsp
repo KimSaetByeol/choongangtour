@@ -7,7 +7,7 @@
 		style="position: sticky; border-radius: 10px; box-shadow: 1px 1px 1px 1px #C9C9C9; border-style: outset; padding: 10px; z-index: 21; height: 50px; display: flex; flex-direction: row; justify-content: space-around; width: 1450px; padding-top: 10px;">
 
 		<div style="margin-left: 0;">
-			<a href="./"><img src="resources/img/logo.png" height="50px"
+			<a href="./"><img src="resources/img/logo2.png" height="50px"
 				style=""></a>
 		</div>
 

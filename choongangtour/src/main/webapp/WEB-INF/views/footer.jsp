@@ -12,7 +12,7 @@
 						style="vertical-align: middle;" height="20px;">choongangtour_official
 					<br> Choongang tour 2021
 				</div>
-				<img src="resources/img/logo.png"
+				<img src="resources/img/logo2.png"
 					style="height: 130px; margin-bottom: 30px;"><br>
 			</div>
 		</div>
