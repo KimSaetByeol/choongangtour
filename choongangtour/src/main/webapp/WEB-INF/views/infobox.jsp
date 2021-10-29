@@ -78,15 +78,15 @@ function goInfo() {
 				<c:if test="${code eq 'changepw' }">
 					<p>비밀번호가 변경되었습니다.<br>바뀐 비밀번호로 로그인하세요.</p>
 				</c:if>
-					<div style="margin: 0 auto; text-align: center; width: 220px;">
+					<div style="margin: 0; text-align: center; width: 220px;">
 						<form action="./login.do" method="post">
-						<div style="">
-							<div style="float: left;">
-								<input type="text" name="l_id" style="margin-bottom: 6px; width: 150px;"><br>
-								<input type="password" name="l_pw" style="margin-bottom: 6px; width: 150px;"><br>
+						<div style="display:flex; flex-direction:row;">
+							<div >
+								<input type="text" name="l_id" style=" margin-bottom:5px; width: 150px;"><br>
+								<input type="password" name="l_pw" style=" width: 150px;"><br>
 							</div>
-							<div>
-								<button type="submit" style="float: right; height: 48px; width: 60px;">로그인</button>
+							<div style="display:flex; flex-direction:column; justify-content: center;">
+								<button type="submit" style="margin-left:5px; height: 48px; width: 60px; ">로그인</button>
 							</div>
 						</div>
 						</form>
