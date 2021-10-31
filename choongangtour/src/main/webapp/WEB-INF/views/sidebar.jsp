@@ -1,9 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<script>
+$(document).ready(function(){
+	alert("!!");
+	if(window.location.pathname=='/web/login.do'){
+		document.getElementById("infoboxDiv").style.display = 'none';
+	}
+})
+$(document).ready(function(){
+	if(window.location.pathname=='/web/join.do'){
+		document.getElementById("infoboxDiv").style.display = 'none';
+	}
+})
+</script>
 <div id="aside"
 	style="padding-right: 30px; padding-left: 10px; display: flex; flex-direction: column; border-radius: 10px;">
-	<div
+	<div id="infoboxDiv"
 		style="width: 280px; border-radius: 10px; box-shadow: 1px 1px 1px 1px #C9C9C9; border-style: outset; padding: 10px;">
 		<c:import url="/infobox.do"></c:import>
 	</div>

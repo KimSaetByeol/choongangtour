@@ -49,6 +49,9 @@ button {
 <!-- jquery 가져오기 -->
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.6.0.js"></script>
 <script type="text/javascript">
+	$(document).ready(function(){
+		document.getElementById("infoboxDiv").style.display = 'none';
+	})
 	var idchk = 0;
 	var pwchk = 0;
 

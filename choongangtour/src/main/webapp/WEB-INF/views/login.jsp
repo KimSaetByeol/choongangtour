@@ -10,13 +10,18 @@
 <head>
 <meta charset="UTF-8">
 <title>login</title>
-
 <link rel="stylesheet" href="resources/css/style.css">
 <style type="text/css">
 #error {
 	color: red;
 }
 </style>
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.6.0.js"></script>
+<script>
+$(document).ready(function(){
+	document.getElementById("infoboxDiv").style.display = 'none';
+})
+</script>
 </head>
 <body>
 	<c:import url="./banner.jsp" />
