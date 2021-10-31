@@ -49,12 +49,20 @@ $(document).ready(function(){
 			</c:if>
 
 			<form action="./login.do" method="post">
-				<input type="text" name="l_id"><br> <input
-					type="password" name="l_pw"><br>
-				<button type="submit">로그인</button>
-				<br> <a href="./join.do">회원가입</a> <a href="./findid.do">아이디
-					찾기</a>
-			</form>
+						<div>
+							<div>
+								<input type="text" name="l_id" style=" margin-bottom:5px; width: 150px;"><br>
+								<input type="password" name="l_pw" style=" width: 150px;"><br>
+							</div>
+							<div>
+								<button type="submit" style="margin-top: 10px;margin-bottom: 10px;width: 155px;">로그인</button>
+							</div>
+						</div>
+						</form>
+						<div style="display: inline-block; margin-top: 5px; ">
+							<a href="./join.do"> 회원가입</a> | 
+							<a href="./findid.do">아이디 찾기</a>
+						</div>
 		</div>
 		<c:import url="./sidebar.jsp" />
 	</div>
