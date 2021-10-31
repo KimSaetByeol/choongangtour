@@ -539,7 +539,7 @@ function Bleave(){
 	
 	<a style="float: left;">
 	<img src="" usemap="#mainmap1" id="regional_map1" >
-	<img src="resources/img/guide_map_main.png" usemap="#mainmap" id="regional_map" align="left">
+	<img src="resources/img/guide_map_main2.png" usemap="#mainmap" id="regional_map" align="left">
 	   </a>
 		<div>
 		<map name="mainmap">
